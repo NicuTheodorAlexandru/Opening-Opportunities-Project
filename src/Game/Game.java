@@ -8,6 +8,7 @@ package Game;
 import Game.Display.Display;
 import Game.Display.SpriteSheet;
 import Game.GUI.Bar;
+import Game.GUI.GUI;
 import Game.Level.Level;
 import java.awt.Canvas;
 import java.awt.Color;
@@ -30,8 +31,8 @@ public class Game extends Canvas implements Runnable
      * @param args the command line arguments
     */
     private final static String TITLE = "Runaway";
-    private final static int WIDTH = 640;
-    private final static int HEIGHT = 640;
+    private final static int WIDTH = 700;
+    private final static int HEIGHT = 700;
     private final static int FRAMECAP = 60;
     
     private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
@@ -41,6 +42,7 @@ public class Game extends Canvas implements Runnable
     private JFrame frame;
     private Thread thread;
     private Level level;
+    public static GUI gui;
     public static Display display;
     
     public static void main(String[] args)
@@ -68,6 +70,7 @@ public class Game extends Canvas implements Runnable
         display = new Display(WIDTH, HEIGHT);
         thread = new Thread(this, "Display");
         level = new Level(256, 256, SpriteSheet.testSpriteSheet);
+        gui = new GUI();
     }
     
     /**
@@ -148,6 +151,7 @@ public class Game extends Canvas implements Runnable
         
         display.clear();
         //render thing HERE
+        gui.render();
         
         for(int i = 0; i < pixels.length; i++)
             pixels[i] = display.pixels[i];

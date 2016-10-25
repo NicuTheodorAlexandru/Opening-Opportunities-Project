@@ -24,6 +24,16 @@ public class Display
         pixels = new int[width * height];
     }
     
+    public int getHeight()
+    {
+        return height;
+    }
+    
+    public int getWidth()
+    {
+        return width;
+    }
+    
     public void clear()
     {
         for(int i = 0; i < pixels.length; i++)
@@ -37,6 +47,20 @@ public class Display
      * @param sprite 
      */
     public void renderSprite(int x, int y, Sprite sprite)
+    {
+        for(int yy = y, j = 0; j < sprite.getHeight(); yy++, j++)
+        {
+            if(yy < 0 || yy >= height)continue;
+            for(int xx = x, i = 0; i < sprite.getWidth(); xx++, i++)
+            {
+                if(xx < 0 || xx >= width)continue;
+                if(sprite.pixels[i + j * sprite.getWidth()] == TRANSPARENT_COLOR)continue;
+                pixels[xx + yy * width] = sprite.pixels[i + j * sprite.getWidth()];
+            }
+        }
+    }
+    
+    public void renderFixedSprite(int x, int y, Sprite sprite)
     {
         for(int yy = y, j = 0; j < sprite.getHeight(); yy++, j++)
         {
