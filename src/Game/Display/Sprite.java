@@ -16,6 +16,19 @@ public class Sprite
     private int width, height;
     public int[] pixels;
     
+    /**
+     * Create a sprite from a sprite sheet
+     * <p>
+     * The x and y are the positions where the sprite
+     * starts in the sprite sheet, width and height being
+     * the width and height of the sprite.
+     * <p>
+     * @param x
+     * @param y
+     * @param width
+     * @param height
+     * @param sheet 
+     */
     public Sprite(int x, int y, int width, int height, SpriteSheet sheet)
     {
         pixels = new int[width * height];

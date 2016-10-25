@@ -6,8 +6,8 @@
 package Game;
 
 import Game.Display.Display;
-import Game.Display.Sprite;
-import Game.Player.Player;
+import Game.Display.SpriteSheet;
+import Game.Level.Level;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -15,9 +15,6 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 
@@ -41,11 +38,8 @@ public class Game extends Canvas implements Runnable
     
     private JFrame frame;
     private Thread thread;
+    private Level level;
     public static Display display;
-    private Player player;
-    
-    public List<Wall>wallList = new ArrayList<Wall>();
-    public Wall wall = new Wall();
     
     public static void main(String[] args)
     {
@@ -62,15 +56,21 @@ public class Game extends Canvas implements Runnable
         game.start();
     }
     
+    /**
+     * Game constructor.
+     */
     public Game()
     {
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
         frame = new JFrame();
         display = new Display(WIDTH, HEIGHT);
         thread = new Thread(this, "Display");
-        player = new Player(320, 320);
+        level = new Level(256, 256, SpriteSheet.testSpriteSheet);
     }
     
+    /**
+     * Start function. Called after Game has been instantiated.
+     */
     public void start()
     {
         if(running == true)return;
@@ -78,6 +78,9 @@ public class Game extends Canvas implements Runnable
         thread.start();
     }
     
+    /**
+     * Stop function. This will be used to close the game.
+     */
     public void stop()
     {
         if(running == false)return;
@@ -88,10 +91,13 @@ public class Game extends Canvas implements Runnable
         }
         catch (InterruptedException ex)
         {
-            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
     }
     
+    /**
+     * Runnable inherited function. Automatically called, it is the main game loop.
+     */
     @Override
     public void run()
     {
@@ -102,11 +108,18 @@ public class Game extends Canvas implements Runnable
         }
     }
     
+    /**
+     * Update function. Called each frame. Update object.
+     */
     private void update()
     {
-        wallList.add(wall);
+        
     }
     
+    /**
+     * Render function. Called each frame, after update is done. 
+     * Draw objects to the screen.
+     */
     private void render()
     {
         BufferStrategy bs = getBufferStrategy();
@@ -121,9 +134,6 @@ public class Game extends Canvas implements Runnable
         
         display.clear();
         //render thing HERE
-        //test render
-        //display.renderSprite(0, 0, Sprite.sprTest);
-        player.render();
         
         for(int i = 0; i < pixels.length; i++)
             pixels[i] = display.pixels[i];

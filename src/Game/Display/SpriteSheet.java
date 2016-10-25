@@ -24,6 +24,16 @@ public class SpriteSheet
     private int width, height;
     public int[] pixels;
     
+    /**
+     * Creates a sprite sheet from a .png image.
+     * <p>
+     * Creates a sprite sheet from an image taken from the specified path,
+     * the path starting from and including the source file(src/).
+     * <p>
+     * @param width
+     * @param height
+     * @param path 
+     */
     public SpriteSheet(int width, int height, String path)
     {
         this.width = width;
