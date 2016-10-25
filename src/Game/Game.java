@@ -6,14 +6,19 @@
 package Game;
 
 import Game.Display.Display;
+import Game.Display.Sprite;
 import Game.Display.SpriteSheet;
 import Game.GUI.Bar;
 import Game.GUI.GUI;
+import Game.Input.Keyboard;
+import Game.Input.Mouse;
 import Game.Level.Level;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
@@ -42,6 +47,8 @@ public class Game extends Canvas implements Runnable
     private JFrame frame;
     private Thread thread;
     private Level level;
+    public static Keyboard keyboard;
+    public static Mouse mouse;
     public static GUI gui;
     public static Display display;
     
@@ -69,6 +76,11 @@ public class Game extends Canvas implements Runnable
         frame = new JFrame();
         display = new Display(WIDTH, HEIGHT);
         thread = new Thread(this, "Display");
+        keyboard = new Keyboard();
+        mouse = new Mouse();
+        addKeyListener(keyboard);
+        addMouseListener(mouse);
+        addMouseMotionListener(mouse);
         level = new Level(256, 256, SpriteSheet.testSpriteSheet);
         gui = new GUI();
     }
@@ -151,6 +163,8 @@ public class Game extends Canvas implements Runnable
         
         display.clear();
         //render thing HERE
+        display.renderSprite(160, 160, Sprite.sprTest);
+        //render GUI over everything
         gui.render();
         
         for(int i = 0; i < pixels.length; i++)

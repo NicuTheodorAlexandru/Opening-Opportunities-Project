@@ -19,7 +19,7 @@ import javax.imageio.ImageIO;
 public class SpriteSheet
 {
     //spritesheets
-    public static SpriteSheet testSpriteSheet = new SpriteSheet(256, 256, "src/Resources/Sheets/spritesheet.png");
+    public static SpriteSheet testSpriteSheet = new SpriteSheet(32, 64, "src/Resources/Sheets/sheet.png");
     
     private int width, height;
     public int[] pixels;
