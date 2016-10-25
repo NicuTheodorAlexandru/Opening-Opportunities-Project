@@ -49,4 +49,44 @@ public class Display
             }
         }
     }
+    
+    public void renderFixedBar(int x, int y, int width, int height, int borderSize, int outLineColor, int color1, int percentage)
+    {
+        //draw outline
+        //upper and bottom outline
+        for(int yy = y; yy < y + borderSize; yy++)
+        {
+            if(yy < 0 || yy >= this.height)continue;
+            for(int xx = x + borderSize; xx < x + width + borderSize; xx++)
+            {
+                if(xx < 0 || xx >= this.width)continue;
+                pixels[xx + yy * this.width] = outLineColor;
+                if(yy + height >= this.height)continue;
+                pixels[xx + (yy + height) * this.width] = outLineColor;
+            }
+        }
+        //left and right outline
+        for(int xx = x; xx < x + borderSize; xx++)
+        {
+            if(xx < 0 || xx >= this.width)continue;
+            for(int yy = y; yy < y + height + borderSize; yy++)
+            {
+                if(yy < 0 || yy >= this.height)continue;
+                pixels[xx + yy * this.width] = outLineColor;
+                if(xx + width + borderSize < 0 || xx + width + borderSize >= this.width)continue;
+                pixels[(xx + width + borderSize) + yy * this.width] = outLineColor;
+            }
+        }
+        //draw containment
+        for(int yy = y + borderSize; yy < y + height; yy++)
+        {
+            if(yy < 0 || yy >= this.height)continue;
+            for(int xx = x + borderSize; xx < x + width + borderSize; xx++)
+            {
+                if(xx < 0 || xx >= this.width)continue;
+                if(xx - x - borderSize >= Math.round((width * percentage) / 100))continue;
+                pixels[xx + yy * this.width] = color1;
+            }
+        }
+    }
 }
