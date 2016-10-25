@@ -7,6 +7,7 @@ package Game;
 
 import Game.Display.Display;
 import Game.Display.Sprite;
+import Game.Player.Player;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -14,6 +15,8 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
@@ -38,7 +41,11 @@ public class Game extends Canvas implements Runnable
     
     private JFrame frame;
     private Thread thread;
-    private Display display;
+    public static Display display;
+    private Player player;
+    
+    public List<Wall>wallList = new ArrayList<Wall>();
+    public Wall wall = new Wall();
     
     public static void main(String[] args)
     {
@@ -61,6 +68,7 @@ public class Game extends Canvas implements Runnable
         frame = new JFrame();
         display = new Display(WIDTH, HEIGHT);
         thread = new Thread(this, "Display");
+        player = new Player(320, 320);
     }
     
     public void start()
@@ -96,7 +104,7 @@ public class Game extends Canvas implements Runnable
     
     private void update()
     {
-        
+        wallList.add(wall);
     }
     
     private void render()
@@ -114,7 +122,8 @@ public class Game extends Canvas implements Runnable
         display.clear();
         //render thing HERE
         //test render
-        display.renderSprite(0, 0, Sprite.sprTest);
+        //display.renderSprite(0, 0, Sprite.sprTest);
+        player.render();
         
         for(int i = 0; i < pixels.length; i++)
             pixels[i] = display.pixels[i];

@@ -12,7 +12,7 @@ package Game.Display;
 public class Display
 {
     private final static int CLEAR_COLOR = 0xff123456;
-    
+    int[] a, b, c, d;
     private int width, height;
     public int[] pixels;
     
@@ -21,6 +21,7 @@ public class Display
         this.width = width;
         this.height = height;
         pixels = new int[width * height];
+        a = new int[10 + 10];
     }
     
     public void clear()
