@@ -31,6 +31,7 @@ public class Game extends Canvas implements Runnable
     private final static String TITLE = "Runaway";
     private final static int WIDTH = 640;
     private final static int HEIGHT = 640;
+    private final static int FRAMECAP = 60;
     
     private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
     private int[] pixels = ((DataBufferInt)image.getRaster().getDataBuffer()).getData();
@@ -101,11 +102,22 @@ public class Game extends Canvas implements Runnable
     @Override
     public void run()
     {
+        long lastTime = System.nanoTime();
+        final double ns = 1000000000.0 / FRAMECAP;
+        double delta = 0;
+        requestFocus();
         while(running)
         {
-            update();
-            render();
+            long now = System.nanoTime();
+            delta += (now - lastTime) / ns;
+            lastTime = now;
+            while(delta >= 1)
+            {
+                update();
+                render();
+            }
         }
+        stop();
     }
     
     /**
