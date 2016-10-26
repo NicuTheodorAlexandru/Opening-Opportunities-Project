@@ -11,7 +11,7 @@ package Game.GUI;
  */
 public class GUI
 {
-    private Bar healthBar, hungerBar, thirstBar, restBar, happinessBar;
+    public Bar healthBar, hungerBar, thirstBar, restBar, happinessBar;
     
     public GUI()
     {

@@ -11,7 +11,8 @@ package Game.GUI;
  */
 public class Bar
 {
-    private int x, y, width, height, borderSize, percentage, color1, outLineColor;
+    private int x, y, width, height, borderSize, color1, outLineColor;
+    double percentage;
     
     public Bar(int x, int y, int width, int height, int borderSize, int outLineColor, int color1)
     {
@@ -30,12 +31,12 @@ public class Bar
         percentage = value;
     }
     
-    public int getValue()
+    public double getValue()
     {
         return percentage;
     }
     
-    public void changeValue(int value)
+    public void changeValue(double value)
     {
         percentage += value;
         if(percentage < 0)
@@ -52,6 +53,6 @@ public class Bar
     
     public void render()
     {
-        Game.Game.display.renderFixedBar(x, y, width, height, borderSize, outLineColor, color1, percentage);
+        Game.Game.display.renderFixedBar(x, y, width, height, borderSize, outLineColor, color1, (int)percentage);
     }
 }

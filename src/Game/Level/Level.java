@@ -5,6 +5,7 @@
  */
 package Game.Level;
 
+import Game.Display.Sprite;
 import Game.Display.SpriteSheet;
 
 public class Level
@@ -25,6 +26,16 @@ public class Level
         this.width = width;
         this.height = height;
         load(sheet);
+    }
+    
+    public void render()
+    {
+        Game.Game.display.renderSprite(0, 0, Sprite.sprGrass);
+    }
+    
+    public void update()
+    {
+        
     }
     
     private void load(SpriteSheet sheet)

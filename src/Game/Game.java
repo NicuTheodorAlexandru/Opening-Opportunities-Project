@@ -5,6 +5,7 @@
  */
 package Game;
 
+import Game.Entity.Player;
 import Game.Display.Display;
 import Game.Display.Sprite;
 import Game.Display.SpriteSheet;
@@ -47,10 +48,14 @@ public class Game extends Canvas implements Runnable
     private JFrame frame;
     private Thread thread;
     private Level level;
+    private Player player;
     public static Keyboard keyboard;
     public static Mouse mouse;
     public static GUI gui;
     public static Display display;
+    
+    public static int xScroll;
+    public static int yScroll;
     
     public static void main(String[] args)
     {
@@ -83,6 +88,7 @@ public class Game extends Canvas implements Runnable
         addMouseMotionListener(mouse);
         level = new Level(256, 256, SpriteSheet.testSpriteSheet);
         gui = new GUI();
+        player = new Player(320, 320);
     }
     
     /**
@@ -142,7 +148,7 @@ public class Game extends Canvas implements Runnable
      */
     private void update()
     {
-        
+        player.update();
     }
     
     /**
@@ -163,7 +169,9 @@ public class Game extends Canvas implements Runnable
         
         display.clear();
         //render thing HERE
-        display.renderSprite(160, 160, Sprite.sprTest);
+        player.render();
+        level.render();
+        display.renderSprite(160, 160, Sprite.sprCharacter);
         //render GUI over everything
         gui.render();
         

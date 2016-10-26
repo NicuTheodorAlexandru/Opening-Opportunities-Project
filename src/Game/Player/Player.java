@@ -27,6 +27,6 @@ public class Player
     }
     public void render()
     {
-        Game.Game.display.renderSprite(x, y, Sprite.sprTest);
+        Game.Game.display.renderSprite(x, y, Sprite.sprCharacter);
     }
 }

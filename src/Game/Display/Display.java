@@ -48,10 +48,10 @@ public class Display
      */
     public void renderSprite(int x, int y, Sprite sprite)
     {
-        for(int yy = y, j = 0; j < sprite.getHeight(); yy++, j++)
+        for(int yy = y + Game.Game.yScroll, j = 0; j < sprite.getHeight(); yy++, j++)
         {
             if(yy < 0 || yy >= height)continue;
-            for(int xx = x, i = 0; i < sprite.getWidth(); xx++, i++)
+            for(int xx = x + Game.Game.xScroll, i = 0; i < sprite.getWidth(); xx++, i++)
             {
                 if(xx < 0 || xx >= width)continue;
                 if(sprite.pixels[i + j * sprite.getWidth()] == TRANSPARENT_COLOR)continue;
@@ -108,7 +108,11 @@ public class Display
             for(int xx = x + borderSize; xx < x + width + borderSize; xx++)
             {
                 if(xx < 0 || xx >= this.width)continue;
-                if(xx - x - borderSize >= Math.round((width * percentage) / 100))continue;
+                if(xx - x - borderSize >= Math.round((width * percentage) / 100))
+                {
+                    pixels[xx + yy * this.width] = outLineColor;
+                    continue;
+                }
                 pixels[xx + yy * this.width] = color1;
             }
         }

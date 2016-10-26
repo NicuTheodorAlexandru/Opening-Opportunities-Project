@@ -14,7 +14,7 @@ import java.awt.event.KeyListener;
  */
 public class Keyboard implements KeyListener
 {
-    private boolean keys[] = new boolean[100];
+    private boolean keys[] = new boolean[300];
     
     public boolean checkKey(int key)
     {

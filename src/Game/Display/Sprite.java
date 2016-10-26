@@ -11,7 +11,8 @@ package Game.Display;
  */
 public class Sprite
 {
-    public static Sprite sprTest = new Sprite(0, 0, 32, 64, SpriteSheet.testSpriteSheet);
+    public static Sprite sprCharacter = new Sprite(0, 0, 32, 64, SpriteSheet.testSpriteSheet);
+    public static Sprite sprGrass = new Sprite(32, 0, 32, 32, SpriteSheet.testSpriteSheet);
     
     private int width, height;
     public int[] pixels;
