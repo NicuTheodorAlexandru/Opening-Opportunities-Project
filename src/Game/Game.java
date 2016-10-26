@@ -168,6 +168,7 @@ public class Game extends Canvas implements Runnable
         Graphics g = bs.getDrawGraphics();
         
         display.clear();
+        display.setGraphics(g);
         //render thing HERE
         player.render();
         level.render();

@@ -5,6 +5,10 @@
  */
 package Game.Display;
 
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+
 /**
  *
  * @author vv
@@ -16,12 +20,18 @@ public class Display
     
     private int width, height;
     public int[] pixels;
+    private Graphics g;
     
     public Display(int width, int height)
     {
         this.width = width;
         this.height = height;
         pixels = new int[width * height];
+    }
+    
+    public void setGraphics(Graphics g)
+    {
+        this.g = g;
     }
     
     public int getHeight()
@@ -116,5 +126,23 @@ public class Display
                 pixels[xx + yy * this.width] = color1;
             }
         }
+    }
+    
+    public void renderFixedText(int x, int y, String font, String text, int style, int size, Color color)
+    {
+        Font f = new Font(font, style, size);
+        g.setColor(color);
+        g.setFont(f);
+        g.drawString(text, x, y + size);
+    }
+    
+    public void renderText(int x, int y, String font, int style, int size, Color color)
+    {
+        int xx = x + Game.Game.xScroll;
+        int yy = y + Game.Game.yScroll;
+        Font f = new Font(font, style, size);
+        g.setColor(color);
+        g.setFont(f);
+        g.drawString(font, xx, yy + size);
     }
 }

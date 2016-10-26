@@ -12,6 +12,7 @@ package Game.GUI;
 public class GUI
 {
     public Bar healthBar, hungerBar, thirstBar, restBar, happinessBar;
+    private int year, month, day;
     
     public GUI()
     {
