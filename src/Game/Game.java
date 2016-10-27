@@ -49,11 +49,13 @@ public class Game extends Canvas implements Runnable
     private Thread thread;
     private Level level;
     private Player player;
+    private Graphics g;
     public static Keyboard keyboard;
     public static Mouse mouse;
     public static GUI gui;
     public static Display display;
     
+    public static long updates = 0;
     public static int xScroll;
     public static int yScroll;
     
@@ -137,6 +139,7 @@ public class Game extends Canvas implements Runnable
             while(delta >= 1)
             {
                 update();
+                updates++;
                 render();
             }
         }
@@ -148,6 +151,7 @@ public class Game extends Canvas implements Runnable
      */
     private void update()
     {
+        gui.update();
         player.update();
     }
     
@@ -165,10 +169,13 @@ public class Game extends Canvas implements Runnable
             return;
         }
         
-        Graphics g = bs.getDrawGraphics();
+        g = bs.getDrawGraphics();
         
         display.clear();
         display.setGraphics(g);
+        g.setColor(Color.BLACK);
+        g.fillRect(0, 0, WIDTH, HEIGHT);
+        g.drawImage(image, 0, 0, WIDTH, HEIGHT, null);
         //render thing HERE
         player.render();
         level.render();
@@ -178,10 +185,6 @@ public class Game extends Canvas implements Runnable
         
         for(int i = 0; i < pixels.length; i++)
             pixels[i] = display.pixels[i];
-        
-        g.setColor(Color.BLACK);
-        g.fillRect(0, 0, WIDTH, HEIGHT);
-        g.drawImage(image, 0, 0, WIDTH, HEIGHT, null);
         
         g.dispose();
         bs.show();

@@ -136,13 +136,13 @@ public class Display
         g.drawString(text, x, y + size);
     }
     
-    public void renderText(int x, int y, String font, int style, int size, Color color)
+    public void renderText(int x, int y, String font, String text, int style, int size, Color color)
     {
         int xx = x + Game.Game.xScroll;
         int yy = y + Game.Game.yScroll;
         Font f = new Font(font, style, size);
         g.setColor(color);
         g.setFont(f);
-        g.drawString(font, xx, yy + size);
+        g.drawString(text, xx, yy + size);
     }
 }

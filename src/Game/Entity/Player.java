@@ -16,7 +16,7 @@ import java.awt.event.KeyEvent;
 public class Player extends Entity
 {
     private int speed = 1;
-    private double decrement = -0.01f;
+    private double decrement = -0.001f;
     
     public Player(int x, int y)
     {

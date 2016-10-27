@@ -5,14 +5,22 @@
  */
 package Game.GUI;
 
+import java.awt.Color;
+import java.awt.Font;
+
 /**
  *
  * @author vv
  */
 public class GUI
 {
+    private final int FRAMES_PER_MINUTE = 2;
+    
     public Bar healthBar, hungerBar, thirstBar, restBar, happinessBar;
-    private int year, month, day;
+    private int year, month, day, hour, minute, size;
+    private double money;
+    private long updates;
+    private String sYear, sMonth, sDay, sHour, sMinute;
     
     public GUI()
     {
@@ -21,14 +29,194 @@ public class GUI
         thirstBar = new Bar(Game.Game.display.getWidth() - 16 - 100, Game.Game.display.getHeight() - 64, 100, 16, 2, 0xff000000, 0xff5dd3d3);
         restBar = new Bar(Game.Game.display.getWidth() - 16 - 100, Game.Game.display.getHeight() - 96, 100, 16, 2, 0xff000000, 0xffffffff);
         happinessBar = new Bar(Game.Game.display.getWidth() - 16 - 100, Game.Game.display.getHeight() - 128, 100, 16, 2, 0xff000000, 0xffffee31);
+        day = 1;
+        month = 1;
+        year = 1;
+        hour = 0;
+        minute = 0;
+        updates = 0;
+        size = 20;
+        sYear = sMonth = sDay = sHour = sMinute = "A";
+    }
+    
+    private void date()
+    {
+        if(updates < Game.Game.updates - FRAMES_PER_MINUTE)
+        if(day >= 25)
+        {
+            if(month == 5 && day >= 25)
+            {
+                day = 1;
+                month++;
+            }
+            else if(month == 11 && day >= 25)
+            {
+                day = 1;
+                month++;
+            }
+            else if(month == 2 && day >= 26)
+            {
+                day = 1;
+                month++;
+            }
+            else if(month == 3 && day >= 26)
+            {
+                day = 1;
+                month++;
+            }
+            else if(month == 7 && day >= 26)
+            {
+                day = 1;
+                month++;
+            }
+            else if(month == 8 && day >= 26)
+            {
+                day = 1;
+                month++;
+            }
+            else if(month == 9 && day >= 26)
+            {
+                day = 1;
+                month++;
+            }
+            else if(month == 10 && day >= 26)
+            {
+                day = 1;
+                month++;
+            }
+            else if(month == 12 && day >= 26)
+            {
+                day = 1;
+                month++;
+            }
+            else if(month == 6 && day >= 27)
+            {
+                day = 1;
+                month++;
+            }
+            else if(month == 1 && day >= 28)
+            {
+                day = 1;
+                month++;
+            }
+            else if(month == 4 && day >= 28)
+            {
+                day = 1;
+                month++;
+            }
+            else if(month == 13 && day >= 31)
+            {
+                day = 1;
+                month++;
+            }
+        }
+        if(month >= 14)
+        {
+            month = 1;
+            year++;
+        }
+        if(day <= 9)
+        {
+            sDay = "0" + Integer.toString(day);
+        }
+        else sDay = Integer.toString(day);
+        sYear = Integer.toString(year);
+        switch (month)
+        {
+            case 1:
+                sMonth = "Ursarium";
+                break;
+            case 2:
+                sMonth = "Polos";
+                break;
+            case 3:
+                sMonth = "Crisium";
+                break;
+            case 4:
+                sMonth = "Farsium";
+                break;
+            case 5:
+                sMonth = "Grodom";
+                break;
+            case 6:
+                sMonth = "Rotos";
+                break;
+            case 7:
+                sMonth = "Teron";
+                break;
+            case 8:
+                sMonth = "Redum";
+                break;
+            case 9:
+                sMonth = "Barus";
+                break;
+            case 10:
+                sMonth = "Etalis";
+                break;
+            case 11:
+                sMonth = "Sevrum";
+                break;
+            case 12:
+                sMonth = "Tori";
+                break;
+            case 13:
+                sMonth = "Snowrium";
+                break;
+            default:
+                break;
+        }
+    }
+    
+    private void time()
+    {
+        if(updates <= Game.Game.updates - FRAMES_PER_MINUTE)
+        {
+            updates = Game.Game.updates;
+            minute++;
+            if(minute >= 60)
+            {
+                minute = 0;
+                hour++;
+            }
+            if(hour >= 24)
+            {
+                hour = 0;
+                day++;
+            }
+            if(hour <= 9)
+            {
+                //sHour = "0"
+            }
+            sHour = Integer.toString(hour);
+            sMinute = Integer.toString(minute);
+            //update date
+            date();
+        }
+    }
+    
+    public void update()
+    {
+        //update time
+        time();
     }
     
     public void render()
     {
+        //render stat bars
         healthBar.render();
         hungerBar.render();
         thirstBar.render();
         restBar.render();
         happinessBar.render();
+        //render time & date
+        Game.Game.display.renderFixedText(Game.Game.display.getWidth() - 150, 22, "Arial", sHour + ":" + sMinute, Font.PLAIN, size, Color.WHITE);
+        Game.Game.display.renderFixedText(Game.Game.display.getWidth() - 150, 0, "Arial", sYear + "/" + sMonth + "/" + sDay, Font.PLAIN, size, Color.WHITE);
+        //render money
+        Game.Game.display.renderFixedText(0, 0, "Arial", Double.toString(money) + "$", Font.PLAIN, 20, Color.WHITE);
+    }
+    
+    public void changeMoney(double value)
+    {
+        money += value;
     }
 }
