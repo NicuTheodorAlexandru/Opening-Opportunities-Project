@@ -8,8 +8,6 @@ package Game.Display;
 import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
 /**
@@ -20,6 +18,7 @@ public class SpriteSheet
 {
     //spritesheets
     public static SpriteSheet testSpriteSheet = new SpriteSheet(64, 64, "src/Resources/Sheets/sheet.png");
+    public static SpriteSheet playerSpriteSheet = new SpriteSheet(128, 128, "src/Resources/Sheets/sheetplayer.png");
     
     private int width, height;
     public int[] pixels;

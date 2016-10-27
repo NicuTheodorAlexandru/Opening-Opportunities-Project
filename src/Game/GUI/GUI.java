@@ -36,7 +36,7 @@ public class GUI
         minute = 0;
         updates = 0;
         size = 20;
-        sYear = sMonth = sDay = sHour = sMinute = "A";
+        sYear = sMonth = sDay = sHour = sMinute = "";
     }
     
     private void date()

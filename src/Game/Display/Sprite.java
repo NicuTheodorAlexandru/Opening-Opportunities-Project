@@ -11,6 +11,16 @@ package Game.Display;
  */
 public class Sprite
 {
+    //player sprites
+    //front
+    public static Sprite sprWalkFrontLeft = new Sprite(64, 0, 32, 64, SpriteSheet.playerSpriteSheet);
+    public static Sprite sprWalkFrontRight = new Sprite(96, 0, 32, 64, SpriteSheet.playerSpriteSheet);
+    public static Sprite sprStayFront = new Sprite(32, 0, 32, 64, SpriteSheet.playerSpriteSheet);
+    //behind
+    public static Sprite sprWalkBackLeft = new Sprite(64, 64, 32, 64, SpriteSheet.playerSpriteSheet);
+    public static Sprite sprWalkBackRight = new Sprite(96, 64, 32, 64, SpriteSheet.playerSpriteSheet);
+    public static Sprite sprStayBehind = new Sprite(32, 64, 32, 64, SpriteSheet.playerSpriteSheet);
+    
     public static Sprite sprCharacter = new Sprite(0, 0, 32, 64, SpriteSheet.testSpriteSheet);
     public static Sprite sprGrass = new Sprite(32, 0, 32, 32, SpriteSheet.testSpriteSheet);
     

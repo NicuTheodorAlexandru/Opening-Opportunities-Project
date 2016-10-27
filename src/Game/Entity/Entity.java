@@ -14,7 +14,8 @@ import Game.Display.Sprite;
 public abstract class Entity
 {
     protected Sprite sprite;
-    protected int x, y;
+    protected int x, y, dir;
+    //dir = 1 front;dir = 2  right; dir = 3 down; dir = 4 left;
     
     public abstract void render();
     
