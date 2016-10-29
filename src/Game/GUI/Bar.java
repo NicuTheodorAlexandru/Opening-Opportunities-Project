@@ -26,6 +26,26 @@ public class Bar
         this.outLineColor = outLineColor;
     }
     
+    public int getY()
+    {
+        return y;
+    }
+    
+    public int getX()
+    {
+        return x;
+    }
+    
+    public int getHeight()
+    {
+        return height;
+    }
+    
+    public int getWidth()
+    {
+        return width;
+    }
+    
     public void setValue(int value)
     {
         percentage = value;

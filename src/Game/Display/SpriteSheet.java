@@ -20,6 +20,7 @@ public class SpriteSheet
     public static SpriteSheet testSpriteSheet = new SpriteSheet(64, 64, "src/Resources/Sheets/sheet.png");
     public static SpriteSheet playerSpriteSheet = new SpriteSheet(128, 128, "src/Resources/Sheets/sheetplayer.png");
     public static SpriteSheet arrowSpriteSheet = new SpriteSheet(32, 9, "src/Resources/Sheets/sageti.png");
+    public static SpriteSheet guiIconSpriteSheet = new SpriteSheet(96, 16, "src/Resources/Sheets/gui.png");
     
     private int width, height;
     public int[] pixels;

@@ -24,6 +24,13 @@ public class Sprite
     //arrows
     public static Sprite sprLeftArrow = new Sprite(0, 0, 16, 9, SpriteSheet.arrowSpriteSheet);
     public static Sprite sprRightArrow = new Sprite(16, 0, 16, 9, SpriteSheet.arrowSpriteSheet);
+    //gui icons
+    public static Sprite sprHungerIcon = new Sprite(0, 0, 16, 16, SpriteSheet.guiIconSpriteSheet);
+    public static Sprite sprThirstIcon = new Sprite(16, 0, 16, 16, SpriteSheet.guiIconSpriteSheet);
+    public static Sprite sprRestIcon = new Sprite(32, 0, 16, 16, SpriteSheet.guiIconSpriteSheet);
+    public static Sprite sprKarmaIcon = new Sprite(48, 0, 16, 16, SpriteSheet.guiIconSpriteSheet);
+    public static Sprite sprHappinessIcon = new Sprite(64, 0, 16, 16, SpriteSheet.guiIconSpriteSheet);
+    public static Sprite sprMoneyIcon = new Sprite(80, 0, 16, 16, SpriteSheet.guiIconSpriteSheet);
     //Misc sprites
     public static Sprite sprCharacter = new Sprite(0, 0, 32, 64, SpriteSheet.testSpriteSheet);
     public static Sprite sprGrass = new Sprite(32, 0, 32, 32, SpriteSheet.testSpriteSheet);

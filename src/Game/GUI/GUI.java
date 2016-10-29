@@ -5,6 +5,7 @@
  */
 package Game.GUI;
 
+import Game.Display.Sprite;
 import java.awt.Color;
 import java.awt.Font;
 
@@ -210,11 +211,18 @@ public class GUI
         thirstBar.render();
         restBar.render();
         happinessBar.render();
+        //render stat bars icons
+        Game.Game.display.renderFixedSprite(healthBar.getX() + healthBar.getWidth() + 2, healthBar.getY(), Sprite.sprHungerIcon);
+        Game.Game.display.renderFixedSprite(hungerBar.getX() + hungerBar.getWidth() + 2, hungerBar.getY(), Sprite.sprHungerIcon);
+        Game.Game.display.renderFixedSprite(thirstBar.getX() + thirstBar.getWidth() + 2, thirstBar.getY(), Sprite.sprThirstIcon);
+        Game.Game.display.renderFixedSprite(restBar.getX() + restBar.getWidth() + 2, restBar.getY(), Sprite.sprRestIcon);
+        Game.Game.display.renderFixedSprite(happinessBar.getX() + happinessBar.getWidth() + 2, happinessBar.getY(), Sprite.sprHappinessIcon);
         //render time & date
         Game.Game.display.renderFixedText(Game.Game.display.getWidth() - 150, 22, "Arial", sHour + ":" + sMinute, Font.PLAIN, size, Color.WHITE);
         Game.Game.display.renderFixedText(Game.Game.display.getWidth() - 150, 0, "Arial", sYear + "/" + sMonth + "/" + sDay, Font.PLAIN, size, Color.WHITE);
         //render money
-        Game.Game.display.renderFixedText(0, 0, "Arial", Double.toString(money) + "$", Font.PLAIN, 20, Color.WHITE);
+        Game.Game.display.renderFixedSprite(0, 0 + 4, Sprite.sprMoneyIcon);
+        Game.Game.display.renderFixedText(Sprite.sprMoneyIcon.getWidth(), 0, "Arial", Double.toString(money), Font.PLAIN, 20, Color.WHITE);
     }
     
     public void changeMoney(double value)
