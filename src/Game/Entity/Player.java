@@ -16,7 +16,7 @@ public class Player extends Entity
 {
     private int speed = 1, anim = 0;
     private double decrement = -0.001f;
-    private boolean moved;
+    private boolean moved = false;
     
     public Player(int x, int y)
     {
@@ -194,8 +194,8 @@ public class Player extends Entity
                 }
                 Game.Game.xScroll += speed;
             }
+            if(moved == false)moved = true;
         }
-        if(moved == false)moved = true;
     }
     
     @Override
@@ -207,9 +207,9 @@ public class Player extends Entity
     @Override
     public void update()
     {
-        dir = 0;
         if(anim < 10000)anim++;
         else anim = 0;
+        moved = false;
         move();
         anim();
     }

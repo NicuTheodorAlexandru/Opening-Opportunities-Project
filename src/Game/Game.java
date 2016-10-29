@@ -9,6 +9,7 @@ import Game.Entity.Player;
 import Game.Display.Display;
 import Game.Display.Sprite;
 import Game.Display.SpriteSheet;
+import Game.Entity.NPCs.NPC1;
 import Game.GUI.Bar;
 import Game.GUI.GUI;
 import Game.Input.Keyboard;
@@ -50,6 +51,7 @@ public class Game extends Canvas implements Runnable
     private Level level;
     private Player player;
     private Graphics g;
+    private NPC1 npc;
     public static Keyboard keyboard;
     public static Mouse mouse;
     public static GUI gui;
@@ -91,6 +93,7 @@ public class Game extends Canvas implements Runnable
         level = new Level(256, 256, SpriteSheet.testSpriteSheet);
         gui = new GUI();
         player = new Player(320, 320);
+        npc = null;
     }
     
     /**
@@ -151,6 +154,8 @@ public class Game extends Canvas implements Runnable
      */
     private void update()
     {
+        if(npc != null)
+            npc.update();
         gui.update();
         player.update();
     }
@@ -177,9 +182,11 @@ public class Game extends Canvas implements Runnable
         g.fillRect(0, 0, WIDTH, HEIGHT);
         g.drawImage(image, 0, 0, WIDTH, HEIGHT, null);
         //render thing HERE
+        if(npc == null)
+            npc = new NPC1();
         player.render();
         level.render();
-        display.renderSprite(160, 160, Sprite.sprCharacter);
+        npc.render();
         //render GUI over everything
         gui.render();
         

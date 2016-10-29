@@ -22,6 +22,8 @@ public class GUI
     private long updates;
     private String sYear, sMonth, sDay, sHour, sMinute;
     
+    public boolean interfaceOpen = false;
+    
     public GUI()
     {
         healthBar = new Bar(16, Game.Game.display.getHeight() - 32, 100, 16, 2, 0xff000000, 0xffff0000);

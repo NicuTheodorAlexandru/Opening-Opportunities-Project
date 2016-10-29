@@ -24,6 +24,28 @@ public class Mouse implements MouseListener, MouseMotionListener
         return mouseB;
     }
     
+    public boolean fixedMouseOver(int x, int y, int width, int height)
+    {
+        if(mouseX == -1)return false;
+        if(mouseY == -1)return false;
+        if(mouseX >= x && mouseX < x + width)
+            if(mouseY >= y && mouseY < y + height)
+                return true;
+        return false;
+    }
+    
+    public boolean mouseOver(int x, int y, int width, int height)
+    {
+        x += Game.Game.xScroll;
+        y += Game.Game.yScroll;
+        if(mouseX == -1)return false;
+        if(mouseY == -1)return false;
+        if(mouseX >= x && mouseX < x + width)
+            if(mouseY >= y && mouseY < y + height)
+                return true;
+        return false;
+    }
+    
     public int getY()
     {
         return mouseY;

@@ -20,7 +20,11 @@ public class Sprite
     public static Sprite sprWalkBackLeft = new Sprite(64, 64, 32, 64, SpriteSheet.playerSpriteSheet);
     public static Sprite sprWalkBackRight = new Sprite(96, 64, 32, 64, SpriteSheet.playerSpriteSheet);
     public static Sprite sprStayBehind = new Sprite(32, 64, 32, 64, SpriteSheet.playerSpriteSheet);
-    
+    //GUI sprites
+    //arrows
+    public static Sprite sprLeftArrow = new Sprite(0, 0, 16, 9, SpriteSheet.arrowSpriteSheet);
+    public static Sprite sprRightArrow = new Sprite(16, 0, 16, 9, SpriteSheet.arrowSpriteSheet);
+    //Misc sprites
     public static Sprite sprCharacter = new Sprite(0, 0, 32, 64, SpriteSheet.testSpriteSheet);
     public static Sprite sprGrass = new Sprite(32, 0, 32, 32, SpriteSheet.testSpriteSheet);
     

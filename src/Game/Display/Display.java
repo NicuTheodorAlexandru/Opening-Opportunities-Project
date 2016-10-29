@@ -29,6 +29,11 @@ public class Display
         pixels = new int[width * height];
     }
     
+    public Graphics getGraphics()
+    {
+        return g;
+    }
+    
     public void setGraphics(Graphics g)
     {
         this.g = g;
@@ -144,5 +149,85 @@ public class Display
         g.setColor(color);
         g.setFont(f);
         g.drawString(text, xx, yy + size);
+    }
+    
+    public void renderBox(int x, int y, int width, int height, int borderSize, int borderColor, int insideColor)
+    {
+        x += Game.Game.xScroll;
+        y += Game.Game.yScroll;
+        //render outline
+        //render lines
+        for(int yy = y; yy < y + borderSize; yy++)
+        {
+            if(yy < 0 || yy >= this.height)continue;
+            for(int xx = x; xx < x + width; xx++)
+            {
+                if(xx < 0 || xx >= this.width)continue;
+                pixels[xx + yy * this.width] = borderColor;
+                if(yy + height < 0 || yy + height >= this.height)continue;
+                pixels[xx + (yy + height) * this.width] = borderColor;
+            }
+        }
+        //render columns
+        for(int xx = x; xx < x + borderSize; xx++)
+        {
+            if(xx < 0 || xx >= this.width)continue;
+            for(int yy = y; yy < y + height; yy++)
+            {
+                if(yy < 0 || yy >= this.height)continue;
+                pixels[xx + yy * this.width] = borderColor;
+                if(xx + width < 0 || xx + width >= this.width)continue;
+                pixels[(xx + width) + yy * this.width] = borderColor;
+            }
+        }
+        //render inside
+        for(int yy = y + borderSize; yy < y + height; yy++)
+        {
+            if(yy < 0 || yy >= this.height)continue;
+            for(int xx = x + borderSize; xx < x + width; xx++)
+            {
+                if(xx < 0 || xx >= this.width)continue;
+                pixels[xx + yy * this.width] = insideColor;
+            }
+        }
+    }
+    
+    public void renderFixedBox(int x, int y, int width, int height, int borderSize, int borderColor, int insideColor)
+    {
+        //render outline
+        //render lines
+        for(int yy = y; yy < y + borderSize; yy++)
+        {
+            if(yy < 0 || yy >= this.height)continue;
+            for(int xx = x; xx < x + width; xx++)
+            {
+                if(xx < 0 || xx >= this.width)continue;
+                pixels[xx + yy * this.width] = borderColor;
+                if(yy + height < 0 || yy + height >= this.height)continue;
+                pixels[xx + (yy + height) * this.width] = borderColor;
+            }
+        }
+        //render columns
+        for(int xx = x; xx < x + borderSize; xx++)
+        {
+            if(xx < 0 || xx >= this.width)continue;
+            for(int yy = y; yy < y + height; yy++)
+            {
+                if(yy < 0 || yy >= this.height)continue;
+                pixels[xx + yy * this.width] = borderColor;
+                if(xx + width < 0 || xx + width >= this.width)continue;
+                pixels[(xx + width) + yy * this.width] = borderColor;
+            }
+        }
+        //render inside
+        for(int yy = y + borderSize; yy < y + height; yy++)
+        {
+            if(yy < 0 || yy >= this.height)continue;
+            for(int xx = x + borderSize; xx < x + width; xx++)
+            {
+                if(xx < 0 || xx >= this.width)continue;
+                pixels[xx + yy * this.width] = insideColor;
+            }
+        }
     }
 }
