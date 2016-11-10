@@ -20,4 +20,19 @@ public abstract class Entity
     public abstract void render();
     
     public abstract void update();
+    
+    public int getX()
+    {
+        return x;
+    }
+    
+    public int getY()
+    {
+        return y;
+    }
+    
+    public int getDir()
+    {
+        return dir;
+    }
 }

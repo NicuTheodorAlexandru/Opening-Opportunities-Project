@@ -18,6 +18,12 @@ public class Mouse implements MouseListener, MouseMotionListener
     private int mouseB = -1;
     private int mouseX = -1;
     private int mouseY = -1;
+    private boolean mouseLeftClicked = false, skip = false;
+    
+    public boolean getMouseLeftClick()
+    {
+        return mouseLeftClicked;
+    }
     
     public int getMouseButton()
     {
@@ -48,10 +54,20 @@ public class Mouse implements MouseListener, MouseMotionListener
     
     public int getY()
     {
-        return mouseY;
+        return mouseY + Game.Game.yScroll;
     }
     
     public int getX()
+    {
+        return mouseX + Game.Game.xScroll;
+    }
+    
+    public int getFixedY()
+    {
+        return mouseY;
+    }
+    
+    public int getFixedX()
     {
         return mouseX;
     }
@@ -59,7 +75,11 @@ public class Mouse implements MouseListener, MouseMotionListener
     @Override
     public void mouseClicked(MouseEvent e)
     {
-        
+        if(e.getButton() == MouseEvent.BUTTON1)
+        {
+            mouseLeftClicked = true;
+            skip = true;
+        }
     }
     
     @Override
@@ -98,5 +118,18 @@ public class Mouse implements MouseListener, MouseMotionListener
     {
         mouseX = e.getX();
         mouseY = e.getY();
+    }
+    
+    public void update()
+    {
+        reset();
+    }
+    
+    private void reset()
+    {
+        if(skip == false)
+            mouseLeftClicked = false;
+        else
+            skip = false;
     }
 }

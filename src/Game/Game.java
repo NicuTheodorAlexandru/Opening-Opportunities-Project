@@ -15,6 +15,7 @@ import Game.GUI.GUI;
 import Game.Input.Keyboard;
 import Game.Input.Mouse;
 import Game.Level.Level;
+import Items.Clothing.Backpack;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -49,7 +50,7 @@ public class Game extends Canvas implements Runnable
     private JFrame frame;
     private Thread thread;
     private Level level;
-    private Player player;
+    public static Player player;
     private Graphics g;
     private NPC1 npc;
     public static Keyboard keyboard;
@@ -94,6 +95,7 @@ public class Game extends Canvas implements Runnable
         gui = new GUI();
         player = new Player(320, 320);
         npc = null;
+        level.add(new Backpack(160, 160, Sprite.sprGrass, Sprite.sprGrass, Sprite.sprGrass, Sprite.sprGrass));
     }
     
     /**
@@ -154,8 +156,11 @@ public class Game extends Canvas implements Runnable
      */
     private void update()
     {
+        //update input first
+        mouse.update();
         if(npc != null)
             npc.update();
+        level.update();
         gui.update();
         player.update();
     }
@@ -184,10 +189,10 @@ public class Game extends Canvas implements Runnable
         //render thing HERE
         if(npc == null)
             npc = new NPC1();
-        player.render();
         level.render();
         npc.render();
         //render GUI over everything
+        player.render();
         gui.render();
         
         for(int i = 0; i < pixels.length; i++)

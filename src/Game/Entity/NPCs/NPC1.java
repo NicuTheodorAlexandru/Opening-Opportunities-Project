@@ -26,7 +26,7 @@ public class NPC1 extends NPC
         y = 0;
         sprite = Sprite.sprCharacter;
         dialogue = null;
-        templateDialogue = new Dialogue(x - 60, y - 80, 120, 60, "Hallo Mister ! Welcome to our great game! BLA Bla", Color.BLUE);
+        templateDialogue = new Dialogue(x - 60, y - 80, 120, 60, "Hallo Mister ! Welcome to our great game! Mor mor", Color.BLUE);
     }
 
     @Override

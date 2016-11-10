@@ -7,11 +7,18 @@ package Game.Level;
 
 import Game.Display.Sprite;
 import Game.Display.SpriteSheet;
+import Game.Entity.Entity;
+import Items.Item;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Level
 {
     int width, height;
     
+    private List <Entity> entities = new ArrayList<Entity>();
+    private List <Item> items = new ArrayList<Item>();
+    private static Item hand = null;
     /**
      * Level constructor. Generates a level from the specified image.
      * <p>
@@ -30,16 +37,68 @@ public class Level
     
     public void render()
     {
+        //render entities
+        for(int i = 0; i < entities.size(); i++)
+            entities.get(i).render();
+        //render items
+        for(int i = 0; i < items.size(); i++)
+            items.get(i).render();
+        //render hand
+        if(hand != null)
+            hand.render();
         Game.Game.display.renderSprite(0, 0, Sprite.sprGrass);
     }
     
     public void update()
     {
-        
+        //update entities
+        for(int i = 0; i < entities.size(); i++)
+            entities.get(i).update();
+        //update items
+        for(int i = 0; i < items.size(); i++)
+            items.get(i).update();
+        //update hand
+        if(hand != null)
+            hand.update();
     }
     
     private void load(SpriteSheet sheet)
     {
         
+    }
+    
+    private void click()
+    {
+        int x = Game.Game.mouse.getFixedX();
+        int y = Game.Game.mouse.getFixedY();
+    }
+    
+    public void add(Entity e)
+    {
+        entities.add(e);
+    }
+    
+    public void add(Item e)
+    {
+        items.add(e);
+    }
+    
+    public void remove(Entity e)
+    {
+        entities.remove(e);
+    }
+    
+    public void remove(Item e)
+    {
+        items.remove(e);
+    }
+    
+    public Item searchItem(int x, int y)
+    {
+        for(int i = items.size(); i >= 0; i++)
+            if(x >= items.get(i).getX() && x <= items.get(i).getX() + items.get(i).getSprite().getWidth())
+                if(y >= items.get(i).getY() && y <= items.get(i).getY() + items.get(i).getSprite().getHeight())
+                    return items.get(i);
+        return null;
     }
 }

@@ -25,6 +25,8 @@ public class Sprite
     public static Sprite sprLeftArrow = new Sprite(0, 0, 16, 9, SpriteSheet.arrowSpriteSheet);
     public static Sprite sprRightArrow = new Sprite(16, 0, 16, 9, SpriteSheet.arrowSpriteSheet);
     //gui icons
+    public static Sprite sprInventory = new Sprite(0, 0, 150, 500, SpriteSheet.shtInventory);
+    public static Sprite sprEquipment = new Sprite(0, 0, 300, 500, SpriteSheet.shtEquipment);
     public static Sprite sprHungerIcon = new Sprite(0, 0, 16, 16, SpriteSheet.guiIconSpriteSheet);
     public static Sprite sprThirstIcon = new Sprite(16, 0, 16, 16, SpriteSheet.guiIconSpriteSheet);
     public static Sprite sprRestIcon = new Sprite(32, 0, 16, 16, SpriteSheet.guiIconSpriteSheet);

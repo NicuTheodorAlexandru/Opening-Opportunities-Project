@@ -6,6 +6,7 @@
 package Game.Entity;
 
 import Game.Display.Sprite;
+import Game.GUI.Inventory;
 import java.awt.event.KeyEvent;
 
 /**
@@ -17,12 +18,14 @@ public class Player extends Entity
     private int speed = 1, anim = 0;
     private double decrement = -0.001f;
     private boolean moved = false;
+    public static Inventory inventory;
     
     public Player(int x, int y)
     {
         sprite = Sprite.sprCharacter;
         this.x = x;
         this.y = y;
+        inventory = new Inventory();
     }
     
     private void anim()
@@ -202,6 +205,7 @@ public class Player extends Entity
     public void render()
     {
         Game.Game.display.renderSprite(x, y, sprite);
+        inventory.render();
     }
     
     @Override
@@ -210,7 +214,19 @@ public class Player extends Entity
         if(anim < 10000)anim++;
         else anim = 0;
         moved = false;
+        if(Game.Game.gui.interfaceOpen == false)
         move();
         anim();
+        inventory.update();
+    }
+    
+    public int getX()
+    {
+        return x;
+    }
+    
+    public int getY()
+    {
+        return y;
     }
 }

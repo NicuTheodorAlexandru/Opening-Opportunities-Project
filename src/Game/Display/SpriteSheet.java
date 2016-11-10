@@ -21,6 +21,8 @@ public class SpriteSheet
     public static SpriteSheet playerSpriteSheet = new SpriteSheet(128, 128, "src/Resources/Sheets/sheetplayer.png");
     public static SpriteSheet arrowSpriteSheet = new SpriteSheet(32, 9, "src/Resources/Sheets/sageti.png");
     public static SpriteSheet guiIconSpriteSheet = new SpriteSheet(96, 16, "src/Resources/Sheets/gui.png");
+    public static SpriteSheet shtInventory = new SpriteSheet(150, 500, "src/Resources/Sheets/inventory.png");
+    public static SpriteSheet shtEquipment = new SpriteSheet(300, 500, "src/Resources/Sheets/equipment.png");
     
     private int width, height;
     public int[] pixels;

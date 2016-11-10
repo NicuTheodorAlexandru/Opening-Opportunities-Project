@@ -6,6 +6,7 @@
 package Game.GUI;
 
 import Game.Display.Sprite;
+import Items.Item;
 import java.awt.Color;
 import java.awt.Font;
 
@@ -18,12 +19,13 @@ public class GUI
     private final int FRAMES_PER_MINUTE = 2;
     
     public Bar healthBar, hungerBar, thirstBar, restBar, happinessBar;
+    public boolean interfaceOpen = false;
+    public Item hand;
+    
     private int year, month, day, hour, minute, size;
     private double money;
     private long updates;
     private String sYear, sMonth, sDay, sHour, sMinute;
-    
-    public boolean interfaceOpen = false;
     
     public GUI()
     {
@@ -40,6 +42,7 @@ public class GUI
         updates = 0;
         size = 20;
         sYear = sMonth = sDay = sHour = sMinute = "";
+        hand = null;
     }
     
     private void date()
@@ -223,6 +226,9 @@ public class GUI
         //render money
         Game.Game.display.renderFixedSprite(0, 0 + 4, Sprite.sprMoneyIcon);
         Game.Game.display.renderFixedText(Sprite.sprMoneyIcon.getWidth(), 0, "Arial", Double.toString(money), Font.PLAIN, 20, Color.WHITE);
+        //render hand
+        if(hand != null)
+            hand.render();
     }
     
     public void changeMoney(double value)
