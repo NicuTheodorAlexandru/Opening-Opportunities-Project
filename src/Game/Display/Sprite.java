@@ -12,6 +12,14 @@ package Game.Display;
 public class Sprite
 {
     //player sprites
+    //side right
+    public static Sprite sprStaySideRight = new Sprite(0, 64, 32, 64, SpriteSheet.shtSides);
+    public static Sprite sprWalkSideRightLeft = new Sprite(64, 64, 32, 64, SpriteSheet.shtSides);
+    public static Sprite sprWalkSideRightRight = new Sprite(32, 64, 32, 64, SpriteSheet.shtSides);
+    //side left
+    public static Sprite sprStaySideLeft = new Sprite(0, 0, 32, 64, SpriteSheet.shtSides);
+    public static Sprite sprWalkSideLeftLeft = new Sprite(64, 0, 32, 64, SpriteSheet.shtSides);
+    public static Sprite sprWalkSideLeftRight = new Sprite(32, 0, 32, 64, SpriteSheet.shtSides);
     //front
     public static Sprite sprWalkFrontLeft = new Sprite(64, 0, 32, 64, SpriteSheet.playerSpriteSheet);
     public static Sprite sprWalkFrontRight = new Sprite(96, 0, 32, 64, SpriteSheet.playerSpriteSheet);

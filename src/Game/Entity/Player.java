@@ -52,14 +52,14 @@ public class Player extends Entity
             {
                 if(anim % 200 > 100)
                 {
-                    sprite = Sprite.sprWalkFrontRight;
+                    sprite = Sprite.sprWalkSideRightRight;
                 }
                 else 
                 {
-                    sprite = Sprite.sprWalkFrontLeft;
+                    sprite = Sprite.sprWalkSideRightLeft;
                 }
             }
-            else sprite = Sprite.sprStayFront;
+            else sprite = Sprite.sprStaySideRight;
             return;
         }
         if(dir == 3)//down
@@ -84,14 +84,14 @@ public class Player extends Entity
             {
                 if(anim % 200 > 100)
                 {
-                    sprite = Sprite.sprWalkFrontRight;
+                    sprite = Sprite.sprWalkSideLeftRight;
                 }
                 else 
                 {
-                    sprite = Sprite.sprWalkFrontLeft;
+                    sprite = Sprite.sprWalkSideLeftLeft;
                 }
             }
-            else sprite = Sprite.sprStayFront;
+            else sprite = Sprite.sprStaySideLeft;
             return;
         }
     }

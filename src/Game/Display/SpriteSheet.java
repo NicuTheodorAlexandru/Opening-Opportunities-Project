@@ -23,6 +23,7 @@ public class SpriteSheet
     public static SpriteSheet guiIconSpriteSheet = new SpriteSheet(96, 16, "src/Resources/Sheets/gui.png");
     public static SpriteSheet shtInventory = new SpriteSheet(150, 500, "src/Resources/Sheets/inventory.png");
     public static SpriteSheet shtEquipment = new SpriteSheet(300, 500, "src/Resources/Sheets/equipment.png");
+    public static SpriteSheet shtSides = new SpriteSheet(96, 128, "src/Resources/Sheets/laterale.png");
     
     private int width, height;
     public int[] pixels;

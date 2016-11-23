@@ -59,8 +59,8 @@ public class Game extends Canvas implements Runnable
     public static Display display;
     
     public static long updates = 0;
-    public static int xScroll;
-    public static int yScroll;
+    public static int xScroll = 0;
+    public static int yScroll = 0;
     
     public static void main(String[] args)
     {
