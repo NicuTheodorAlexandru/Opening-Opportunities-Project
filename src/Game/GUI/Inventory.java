@@ -7,6 +7,7 @@ package Game.GUI;
 
 import Game.Display.Sprite;
 import Items.Clothing.Backpack;
+import Items.Clothing.Shirt;
 import Items.Item;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -30,6 +31,7 @@ public class Inventory
     public int xshirt, yshirt, widthshirt, heightshirt;
     public int xhat, yhat, widthhat, heighthat;
     public Backpack backpack;
+    public Shirt shirt;
     private List<Item> items = new ArrayList<Item>();
     
     public Inventory()
@@ -39,11 +41,17 @@ public class Inventory
         equipment = Sprite.sprEquipment;
         inventory = Sprite.sprInventory;
         backpack = null;
+        shirt = null;
         
         xbackpack = 20 + (Game.Game.display.getWidth() / 2 - inventory.getWidth() / 2 - equipment.getWidth() + 100);
         ybackpack = 370 + (Game.Game.display.getHeight() / 2 - inventory.getHeight() / 2);
         widthbackpack = 165;
         heightbackpack = 112;
+        
+        xshirt = 0;
+        yshirt = 0;
+        widthshirt = 64;
+        heightshirt = 64;
     }
     
     public boolean getOpen()

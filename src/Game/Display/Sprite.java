@@ -41,6 +41,7 @@ public class Sprite
     public static Sprite sprKarmaIcon = new Sprite(48, 0, 16, 16, SpriteSheet.guiIconSpriteSheet);
     public static Sprite sprHappinessIcon = new Sprite(64, 0, 16, 16, SpriteSheet.guiIconSpriteSheet);
     public static Sprite sprMoneyIcon = new Sprite(80, 0, 16, 16, SpriteSheet.guiIconSpriteSheet);
+    public static Sprite sprHeartIcon = new Sprite(0, 0, 16, 16, SpriteSheet.shtHeart);
     //Misc sprites
     public static Sprite sprCharacter = new Sprite(0, 0, 32, 64, SpriteSheet.testSpriteSheet);
     public static Sprite sprGrass = new Sprite(32, 0, 32, 32, SpriteSheet.testSpriteSheet);

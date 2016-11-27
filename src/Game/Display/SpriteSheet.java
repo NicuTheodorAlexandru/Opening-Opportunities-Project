@@ -24,6 +24,7 @@ public class SpriteSheet
     public static SpriteSheet shtInventory = new SpriteSheet(150, 500, "src/Resources/Sheets/inventory.png");
     public static SpriteSheet shtEquipment = new SpriteSheet(300, 500, "src/Resources/Sheets/equipment.png");
     public static SpriteSheet shtSides = new SpriteSheet(96, 128, "src/Resources/Sheets/laterale.png");
+    public static SpriteSheet shtHeart = new SpriteSheet(16, 16, "src/Resources/Sheets/inimioara.png");
     
     private int width, height;
     public int[] pixels;

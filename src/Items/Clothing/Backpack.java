@@ -67,7 +67,6 @@ public class Backpack extends Clothing
             if(Game.Game.mouse.fixedMouseOver(Player.inventory.xbackpack, Player.inventory.ybackpack, Player.inventory.widthbackpack,
             Player.inventory.heightbackpack) && Player.inventory.getOpen() == true)
             {
-                System.out.println("WOO");
                 inv = true;
                 Player.inventory.backpack = this;
                 placedown();
