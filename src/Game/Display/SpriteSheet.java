@@ -23,8 +23,12 @@ public class SpriteSheet
     public static SpriteSheet guiIconSpriteSheet = new SpriteSheet(96, 16, "src/Resources/Sheets/gui.png");
     public static SpriteSheet shtInventory = new SpriteSheet(150, 500, "src/Resources/Sheets/inventory.png");
     public static SpriteSheet shtEquipment = new SpriteSheet(300, 500, "src/Resources/Sheets/equipment.png");
-    public static SpriteSheet shtSides = new SpriteSheet(96, 128, "src/Resources/Sheets/laterale.png");
-    public static SpriteSheet shtHeart = new SpriteSheet(16, 16, "src/Resources/Sheets/inimioara.png");
+    public static SpriteSheet shtPlayerSides = new SpriteSheet(96, 128, "src/Resources/Sheets/latetrale.png");
+    public static SpriteSheet shtBackpack1 = new SpriteSheet(64, 64, "src/Resources/Sheets/gri.png");
+    public static SpriteSheet shtBackpack2 = new SpriteSheet(70, 64, "src/Resources/Sheets/ghiozdan_gri.png");
+    public static SpriteSheet shtCoin = new SpriteSheet(16, 16, "src/Resources/Sheets/coin.png");
+    public static SpriteSheet shtHeart = new SpriteSheet(16, 16, "src/Resources/Sheets/inimioara (1).png");
+    
     
     private int width, height;
     public int[] pixels;

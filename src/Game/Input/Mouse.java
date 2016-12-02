@@ -19,6 +19,8 @@ public class Mouse implements MouseListener, MouseMotionListener
     private int mouseX = -1;
     private int mouseY = -1;
     private boolean mouseLeftClicked = false, skip = false;
+    private double now = 0;
+    private float secPerClick = 0.0f;
     
     public boolean getMouseLeftClick()
     {
@@ -86,6 +88,8 @@ public class Mouse implements MouseListener, MouseMotionListener
     public void mousePressed(MouseEvent e)
     {
         mouseB = e.getButton();
+        if(mouseB == MouseEvent.BUTTON1)
+            mouseLeftClicked = true;
     }
     
     @Override
@@ -122,14 +126,8 @@ public class Mouse implements MouseListener, MouseMotionListener
     
     public void update()
     {
-        reset();
-    }
-    
-    private void reset()
-    {
-        if(skip == false)
-            mouseLeftClicked = false;
-        else
-            skip = false;
+        
+        //update mouse left click
+        //update skip
     }
 }

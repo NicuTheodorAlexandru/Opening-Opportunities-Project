@@ -8,6 +8,7 @@ package Game.Level;
 import Game.Display.Sprite;
 import Game.Display.SpriteSheet;
 import Game.Entity.Entity;
+import Game.Entity.Player;
 import Items.Item;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +20,8 @@ public class Level
     private List <Entity> entities = new ArrayList<Entity>();
     private List <Item> items = new ArrayList<Item>();
     private static Item hand = null;
+    private Map map;
+    public static Player player;
     /**
      * Level constructor. Generates a level from the specified image.
      * <p>
@@ -32,14 +35,18 @@ public class Level
     {
         this.width = width;
         this.height = height;
+        player = new Player(320, 320);
         load(sheet);
     }
     
     public void render()
     {
+        //render map
         //render entities
         for(int i = 0; i < entities.size(); i++)
             entities.get(i).render();
+        //render player
+        player.render();
         //render items
         for(int i = 0; i < items.size(); i++)
             items.get(i).render();
@@ -54,6 +61,8 @@ public class Level
         //update entities
         for(int i = 0; i < entities.size(); i++)
             entities.get(i).update();
+        //update player
+        player.update();
         //update items
         for(int i = 0; i < items.size(); i++)
             items.get(i).update();
@@ -64,7 +73,7 @@ public class Level
     
     private void load(SpriteSheet sheet)
     {
-        
+        map = new Map(sheet);
     }
     
     private void click()

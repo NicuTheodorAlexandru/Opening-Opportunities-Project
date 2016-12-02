@@ -29,6 +29,14 @@ public class Display
         pixels = new int[width * height];
     }
     
+    public boolean onScreen(int x, int y, int width, int height)
+    {
+        if(x >= Game.Game.xScroll && x - width <= Game.Game.xScroll + Game.Game.display.getWidth())
+            if(y >= Game.Game.yScroll && y - height <= Game.Game.yScroll + Game.Game.display.getHeight())
+                return true;
+        return false;
+    }
+    
     public Graphics getGraphics()
     {
         return g;

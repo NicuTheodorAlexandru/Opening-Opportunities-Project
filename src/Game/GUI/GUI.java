@@ -217,7 +217,7 @@ public class GUI
         restBar.render();
         happinessBar.render();
         //render stat bars icons
-        Game.Game.display.renderFixedSprite(healthBar.getX() + healthBar.getWidth() + 2, healthBar.getY(), Sprite.sprHeartIcon);
+        Game.Game.display.renderFixedSprite(healthBar.getX() + healthBar.getWidth() + 4, healthBar.getY() + 1, Sprite.sprHeartIcon);
         Game.Game.display.renderFixedSprite(hungerBar.getX() + hungerBar.getWidth() + 2, hungerBar.getY(), Sprite.sprHungerIcon);
         Game.Game.display.renderFixedSprite(thirstBar.getX() + thirstBar.getWidth() + 2, thirstBar.getY(), Sprite.sprThirstIcon);
         Game.Game.display.renderFixedSprite(restBar.getX() + restBar.getWidth() + 2, restBar.getY(), Sprite.sprRestIcon);

@@ -10,7 +10,6 @@ import Game.Display.Display;
 import Game.Display.Sprite;
 import Game.Display.SpriteSheet;
 import Game.Entity.NPCs.NPC1;
-import Game.GUI.Bar;
 import Game.GUI.GUI;
 import Game.Input.Keyboard;
 import Game.Input.Mouse;
@@ -20,12 +19,9 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
 
 /**
@@ -50,7 +46,6 @@ public class Game extends Canvas implements Runnable
     private JFrame frame;
     private Thread thread;
     private Level level;
-    public static Player player;
     private Graphics g;
     private NPC1 npc;
     public static Keyboard keyboard;
@@ -93,9 +88,8 @@ public class Game extends Canvas implements Runnable
         addMouseMotionListener(mouse);
         level = new Level(256, 256, SpriteSheet.testSpriteSheet);
         gui = new GUI();
-        player = new Player(320, 320);
         npc = null;
-        level.add(new Backpack(160, 160, Sprite.sprGrass, Sprite.sprGrass, Sprite.sprGrass, Sprite.sprGrass));
+        level.add(new Backpack(160, 160, Sprite.sprBackpackFront, Sprite.sprBackpackBack, Sprite.sprBackpackLeft, Sprite.sprBackpackRight));
     }
     
     /**
@@ -163,7 +157,6 @@ public class Game extends Canvas implements Runnable
             npc.update();
         level.update();
         gui.update();
-        player.update();
     }
     
     /**
@@ -193,7 +186,6 @@ public class Game extends Canvas implements Runnable
         level.render();
         npc.render();
         //render GUI over everything
-        player.render();
         gui.render();
         
         for(int i = 0; i < pixels.length; i++)
