@@ -15,10 +15,17 @@ import java.awt.event.KeyListener;
 public class Keyboard implements KeyListener
 {
     private boolean keys[] = new boolean[300];
+    private boolean pressedKeys[] = new boolean[300];
+    private boolean skip[] = new boolean [300];
     
     public boolean checkKey(int key)
     {
         return keys[key];
+    }
+    
+    public boolean keyClicked(int key)
+    {
+        return pressedKeys[key];
     }
     
     @Override
@@ -31,11 +38,28 @@ public class Keyboard implements KeyListener
     public void keyPressed(KeyEvent e)
     {
         keys[e.getKeyCode()] = true;
+        pressedKeys[e.getKeyCode()] = true;
+        skip[e.getKeyCode()] = true;
     }
     
     @Override
     public void keyReleased(KeyEvent e)
     {
         keys[e.getKeyCode()] = false;
+    }
+    
+    public void update()
+    {
+        for(int i = 0; i < pressedKeys.length; i++)
+        {
+            if(skip[i])
+            {
+                skip[i] = false;
+            }
+            else
+            {
+                pressedKeys[i] = false;
+            }
+        }
     }
 }

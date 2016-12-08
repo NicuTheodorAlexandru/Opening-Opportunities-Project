@@ -54,6 +54,21 @@ public class Inventory
         heightshirt = 64;
     }
     
+    public void remove(Backpack e)
+    {
+        if(backpack == e)
+        {
+            backpack = null;
+            items.remove(e);
+        }
+    }
+    
+    public void add(Backpack e)
+    {
+        backpack = e;
+        items.add(e);
+    }
+    
     public boolean getOpen()
     {
         return open;
@@ -61,6 +76,10 @@ public class Inventory
     
     public void render()
     {
+        //render items
+        if(!Game.Game.gui.interfaceOpen && !open)
+            for(int i = 0; i < items.size(); i++)
+                items.get(i).render();
         //render inventory gui
         if(open == true)
             Game.Game.display.renderFixedSprite(Game.Game.display.getWidth() / 2 - inventory.getWidth() / 2 + 100, Game.Game.display.getHeight() / 2 - inventory.getHeight() / 2, inventory);
@@ -68,33 +87,32 @@ public class Inventory
         //render equipment gui
         if(open == true)
             Game.Game.display.renderFixedSprite(Game.Game.display.getWidth() / 2 - inventory.getWidth() / 2 - equipment.getWidth() + 100, Game.Game.display.getHeight() / 2 - inventory.getHeight() / 2, equipment);
-        //render items
-        if(open == true)
-            for(int i = 0; i < items.size(); i++)
-                items.get(i).render();
         //render equipment
-        if(backpack != null && open == true)
+        if(backpack != null && open)
         {
-            backpack.render();
+            //backpack.render();
             Game.Game.display.renderFixedSprite(xbackpack, ybackpack, backpack.getBackSprite());
         }
     }
     
     public void update()
     {
-        //check if i should open
-        if(Game.Game.gui.interfaceOpen == false)
-            if(Game.Game.keyboard.checkKey(KeyEvent.VK_I))
-            {
-                open = true;
-                Game.Game.gui.interfaceOpen = true;
-            }           
+        boolean clicked = false;
         //check if i should close
-        if(open)
-            if(Game.Game.keyboard.checkKey(KeyEvent.VK_ESCAPE))
+        if(open && !clicked)
+            if(Game.Game.keyboard.keyClicked(KeyEvent.VK_I))
             {
+                clicked = true;
                 open = false;
                 Game.Game.gui.interfaceOpen = false;
+            }
+        //check if i should open
+        if(Game.Game.gui.interfaceOpen == false && !clicked)
+            if(Game.Game.keyboard.keyClicked(KeyEvent.VK_I))
+            {
+                clicked = true;
+                open = true;
+                Game.Game.gui.interfaceOpen = true;
             }
         //check if item is being picked up
         //check if item is being placed

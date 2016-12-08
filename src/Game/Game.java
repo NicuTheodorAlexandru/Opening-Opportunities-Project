@@ -5,11 +5,10 @@
  */
 package Game;
 
-import Game.Entity.Player;
 import Game.Display.Display;
 import Game.Display.Sprite;
 import Game.Display.SpriteSheet;
-import Game.Entity.NPCs.NPC1;
+import Game.Entity.Player;
 import Game.GUI.GUI;
 import Game.Input.Keyboard;
 import Game.Input.Mouse;
@@ -22,6 +21,9 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
 /**
@@ -35,9 +37,9 @@ public class Game extends Canvas implements Runnable
      * @param args the command line arguments
     */
     private final static String TITLE = "Runaway";
-    private final static int WIDTH = 700;
-    private final static int HEIGHT = 700;
-    private final static int FRAMECAP = 1000;
+    public final static int WIDTH = 700;
+    public final static int HEIGHT = 700;
+    private final static int FRAMECAP = 60;
     
     private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
     private int[] pixels = ((DataBufferInt)image.getRaster().getDataBuffer()).getData();
@@ -45,23 +47,32 @@ public class Game extends Canvas implements Runnable
     
     private JFrame frame;
     private Thread thread;
-    private Level level;
+    public static Level mainLevel;
     private Graphics g;
-    private NPC1 npc;
+    //private Cutscene cutscene;
     public static Keyboard keyboard;
     public static Mouse mouse;
     public static GUI gui;
     public static Display display;
     
     public static long updates = 0;
-    public static int xScroll = 0;
-    public static int yScroll = 0;
+    //levels
+    public static Level level1;
+    public static Player player;
     
     public static void main(String[] args)
     {
         // TODO code application logic here
         Game game = new Game();
         
+        try
+        {
+            game.frame.setIconImage(ImageIO.read(new File("src/Resources/Icons/icon.png")));
+        }
+        catch (IOException ex)
+        {
+            System.err.println(ex);
+        }
         game.frame.setResizable(false);
         game.frame.add(game);
         game.frame.setTitle(TITLE);
@@ -86,10 +97,13 @@ public class Game extends Canvas implements Runnable
         addKeyListener(keyboard);
         addMouseListener(mouse);
         addMouseMotionListener(mouse);
-        level = new Level(256, 256, SpriteSheet.testSpriteSheet);
+        player = new Player(0, 0);
+        level1 = new Level(0, 0, SpriteSheet.shtMapInfo);
+        mainLevel = level1;
+        level1.load();
         gui = new GUI();
-        npc = null;
-        level.add(new Backpack(160, 160, Sprite.sprBackpackFront, Sprite.sprBackpackBack, Sprite.sprBackpackLeft, Sprite.sprBackpackRight));
+        level1.add(new Backpack(160, 160, Sprite.sprBackpackFront, Sprite.sprBackpackBack, Sprite.sprBackpackLeft, Sprite.sprBackpackRight));
+        //cutscene = new Cutscene("src/Resources/Video/video.mp4", this);
     }
     
     /**
@@ -126,6 +140,9 @@ public class Game extends Canvas implements Runnable
     @Override
     public void run()
     {
+        player.setPos(0, 0);
+        player.centerCamera();
+        //
         long lastTime = System.nanoTime();
         final double ns = 1000000000.0 / FRAMECAP;
         double delta = 0;
@@ -151,12 +168,12 @@ public class Game extends Canvas implements Runnable
      */
     private void update()
     {
+        //cutscene.init();
         //update input first
+        keyboard.update();
         mouse.update();
-        if(npc != null)
-            npc.update();
-        level.update();
         gui.update();
+        mainLevel.update();
     }
     
     /**
@@ -181,10 +198,7 @@ public class Game extends Canvas implements Runnable
         g.fillRect(0, 0, WIDTH, HEIGHT);
         g.drawImage(image, 0, 0, WIDTH, HEIGHT, null);
         //render thing HERE
-        if(npc == null)
-            npc = new NPC1();
-        level.render();
-        npc.render();
+        mainLevel.render();
         //render GUI over everything
         gui.render();
         

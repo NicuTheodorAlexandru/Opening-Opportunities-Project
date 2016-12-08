@@ -6,6 +6,8 @@
 package Items;
 
 import Game.Display.Sprite;
+import Game.Entity.Player;
+import Items.Clothing.Backpack;
 import java.awt.event.MouseEvent;
 
 /**
@@ -26,7 +28,7 @@ public class Item
     
     public void update()
     {
-        System.out.println("!");
+        
     }
     
     public void render()
@@ -63,7 +65,7 @@ public class Item
     
     protected void placedown()
     {
-        pick = false;
         Game.Game.gui.hand = null;
+        pick = false;
     }
 }

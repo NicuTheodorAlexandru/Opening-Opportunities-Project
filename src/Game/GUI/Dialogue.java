@@ -63,7 +63,6 @@ public class Dialogue
             String word = text[index];
             int width = Game.Game.display.getGraphics().getFontMetrics(new Font("Arial", style, size)).stringWidth(word);
             int height = Game.Game.display.getGraphics().getFontMetrics(new Font("Arial", style, size)).getHeight();
-            System.out.println("Word : " + word + ";width : " + width + ";line progress : " + (cwidth + width) + ";lineWidth : " + lineWidth);
             if(cwidth + width + space >= lineWidth)
             {
                 cline++;
@@ -88,10 +87,8 @@ public class Dialogue
                 words[pages][cline] += " " + word;
                 cwidth += width + space;
             }
-            System.out.println(index + " " + words[pages][cline]);
         }
         if(this.lines[pages] <= 0)this.lines[pages] = lines - 1;
-        System.out.println(this.lines[1]);
     }
     
     public void render()
@@ -101,7 +98,6 @@ public class Dialogue
         //draw text
         for(int line = 0; line <= lines[page]; line++)
         {
-            System.out.println("word : " + words[page][line] + " at page : " + page + " at line : " + line);
             Game.Game.display.renderText(x + 2, y  + (size + 2) * line, "Arial", words[page][line], style, size, textColor);
         }
         //render next arrow

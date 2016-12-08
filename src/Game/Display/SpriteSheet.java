@@ -28,7 +28,19 @@ public class SpriteSheet
     public static SpriteSheet shtBackpack2 = new SpriteSheet(70, 64, "src/Resources/Sheets/ghiozdan_gri.png");
     public static SpriteSheet shtCoin = new SpriteSheet(16, 16, "src/Resources/Sheets/coin.png");
     public static SpriteSheet shtHeart = new SpriteSheet(16, 16, "src/Resources/Sheets/inimioara (1).png");
-    
+    public static SpriteSheet shtMap = new SpriteSheet(2048, 1024, "src/Resources/Sheets/mapa.png");
+    public static SpriteSheet shtBus = new SpriteSheet(249, 87, "src/Resources/Sheets/autobuz.png");
+    public static SpriteSheet shtColiba1 = new SpriteSheet(360, 178, "src/Resources/Sheets/coliba_1.png");
+    public static SpriteSheet shtColiba2 = new SpriteSheet(261, 348, "src/Resources/Sheets/Coliba_2.png");
+    public static SpriteSheet shtColiba3 = new SpriteSheet(265, 352, "src/Resources/Sheets/Coliba_3.png");
+    public static SpriteSheet shtLamp = new SpriteSheet(47, 126, "src/Resources/Sheets/felinar (1).png");
+    public static SpriteSheet shtWood = new SpriteSheet(89, 151, "src/Resources/Sheets/lemne_.png");
+    public static SpriteSheet shtTree = new SpriteSheet(153, 176, "src/Resources/Sheets/copac.png");
+    public static SpriteSheet shtMapInfo = new SpriteSheet(2048, 1024, "src/Resources/Sheets/pixeli.png");
+    public static SpriteSheet shtHutInterior1 = new SpriteSheet(473, 293, "src/Resources/Sheets/col_0.png");
+    public static SpriteSheet shtJukebox1 = new SpriteSheet(32, 56, "src/Resources/Sheets/jukebox.png");
+    public static SpriteSheet shtCounter1 = new SpriteSheet(279, 123, "src/Resources/Sheets/counter.png");
+    public static SpriteSheet shtHutInterior1Info = new SpriteSheet(473, 293, "src/Resources/Sheets/HutInterior1Info.png");
     
     private int width, height;
     public int[] pixels;

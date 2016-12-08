@@ -51,6 +51,19 @@ public class Sprite
     public static Sprite sprBackpackLeft = new Sprite(0, 0, 35, 64, SpriteSheet.shtBackpack2);
     public static Sprite sprBackpackBack = new Sprite(32, 0, 32, 64, SpriteSheet.shtBackpack1);
     public static Sprite sprBackpackRight = new Sprite(35, 0, 35, 64, SpriteSheet.shtBackpack2);
+    //World 
+    public static Sprite sprBus = new Sprite(0, 0, 249, 87, SpriteSheet.shtBus);
+    public static Sprite sprTree = new Sprite(0, 0, 153, 176, SpriteSheet.shtTree);
+    public static Sprite sprLamp = new Sprite(0, 0, 47, 126, SpriteSheet.shtLamp);
+    public static Sprite sprHut1 = new Sprite(0, 0, 360, 178, SpriteSheet.shtColiba1);
+    public static Sprite sprHut2 = new Sprite(0, 0, 261, 348, SpriteSheet.shtColiba2);
+    public static Sprite sprHut3 = new Sprite(0, 0, 265, 352, SpriteSheet.shtColiba3);
+    public static Sprite sprWood = new Sprite(0, 0, 89, 151, SpriteSheet.shtWood);
+    public static Sprite sprMap = new Sprite(0, 0, 2048, 1024, SpriteSheet.shtMap);
+    public static Sprite sprHutInterior1 = new Sprite(0, 0, 473, 293, SpriteSheet.shtHutInterior1);
+    //objects
+    public static Sprite sprJukebox1 = new Sprite(0, 0, 32, 56, SpriteSheet.shtJukebox1);
+    public static Sprite sprCounter1 = new Sprite(0, 0, 279, 123, SpriteSheet.shtCounter1);
     
     private int width, height;
     public int[] pixels;

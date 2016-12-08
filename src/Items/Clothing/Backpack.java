@@ -19,9 +19,8 @@ public class Backpack extends Clothing
 {
     private final static int FRAMES_PER_CLICK = 120;
     
-    private boolean click = true;
+    private boolean click = true, init = true;
     private int dir;
-    private long last;
     
     public Backpack(int x, int y, Sprite sprFront, Sprite sprBack, Sprite sprLeft, Sprite sprRight)
     {
@@ -33,17 +32,18 @@ public class Backpack extends Clothing
         this.sprLeft = sprLeft;
         this.sprRight = sprRight;
         cSprite = sprBack;
-        last = Game.Game.updates;
         pick = false;
     }
     
     @Override
     public void render()
     {
+        
         //render self
-        if(inv == false)
+        if(!inv)
         {
             Game.Game.display.renderSprite(x, y, cSprite);
+            return;
         }
         if(dir == 1)
         {
@@ -66,45 +66,44 @@ public class Backpack extends Clothing
     @Override
     public void update()
     {
-        //update click timing
-        if(!click)
+        if(init)
         {
-            if(last <= Game.Game.updates - FRAMES_PER_CLICK)
-            {
-                click = true;
-                last = Game.Game.updates;
-            }
+            init = false;
+            return;
         }
+        click = Game.Game.mouse.getMouseLeftClick();
         //check placedown
         //System.out.println(Game.Game.mouse.getMouseLeftClick());
-        if(click == true && pick == true && Game.Game.mouse.getMouseButton() == MouseEvent.BUTTON1 && (Game.Game.gui.interfaceOpen == false || Player.inventory.getOpen() == true))
+        if(click == true && pick == true && (Game.Game.gui.interfaceOpen == false || Player.inventory.getOpen() == true))
         {
             if(Game.Game.mouse.fixedMouseOver(Player.inventory.xbackpack, Player.inventory.ybackpack, Player.inventory.widthbackpack,
             Player.inventory.heightbackpack) && Player.inventory.getOpen() == true)
             {
+                init = true;
                 click = false;
-                last = Game.Game.updates;
+                Game.Game.gui.hand = null;
+                Player.inventory.add(this);
                 inv = true;
-                Player.inventory.backpack = this;
                 placedown();
             }
             else
             {
                 click = false;
-                last = Game.Game.updates;
                 placedown();
+                init = true;
+                Game.Game.mainLevel.add(this);
             }
         }
         //check pickup
-        if(click == true && Game.Game.mouse.getMouseButton() == MouseEvent.BUTTON1 && pick == false && Game.Game.gui.hand == null)
+        if(click == true && pick == false && Game.Game.gui.hand == null)
         {
             if(inv == false)
             {
                 if(Game.Game.mouse.mouseOver(x, y, cSprite.getWidth(), cSprite.getHeight()))
                 {
                     click = false;
-                    last = Game.Game.updates;
                     pickup();
+                    Game.Game.mainLevel.remove(this);
                 }
             }
             else 
@@ -113,24 +112,23 @@ public class Backpack extends Clothing
                 Player.inventory.heightbackpack) && Player.inventory.getOpen() == true)
                 {
                     click = false;
-                    last = Game.Game.updates;
-                    inv = false;
-                    Player.inventory.backpack = null;
                     pickup();
+                    inv = false;
+                    Player.inventory.remove(this);
                 }
             }
         }
         //follow
-        if(pick == true)
+        if(pick)
         {
             follow();
         }
         //follow if equiped
-        if(inv == true)
+        if(inv)
         {
-            x = Game.Level.Level.player.getX();
-            y = Game.Level.Level.player.getY();
-            dir = Game.Level.Level.player.getDir();
+            x = Game.Game.player.getX();
+            y = Game.Game.player.getY();
+            dir = Game.Game.player.getDir();
         }
     }
 }

@@ -16,7 +16,7 @@ import java.awt.Font;
  */
 public class GUI
 {
-    private final int FRAMES_PER_MINUTE = 0;
+    private final int FRAMES_PER_SECONDS = 3600;
     
     public Bar healthBar, hungerBar, thirstBar, restBar, happinessBar;
     public boolean interfaceOpen = false;
@@ -47,7 +47,7 @@ public class GUI
     
     private void date()
     {
-        if(updates < Game.Game.updates - FRAMES_PER_MINUTE)
+        if(updates < Game.Game.updates - FRAMES_PER_SECONDS)
         if(day >= 25)
         {
             if(month == 5 && day >= 25)
@@ -175,7 +175,7 @@ public class GUI
     
     private void time()
     {
-        if(updates <= Game.Game.updates - FRAMES_PER_MINUTE)
+        if(updates <= Game.Game.updates - FRAMES_PER_SECONDS)
         {
             minute++;
             if(minute >= 60)
@@ -190,10 +190,16 @@ public class GUI
             }
             if(hour <= 9)
             {
-                //sHour = "0"
+                sHour = "0" + Integer.toString(hour);
             }
-            sHour = Integer.toString(hour);
-            sMinute = Integer.toString(minute);
+            else
+                sHour = Integer.toString(hour);
+            if(minute <= 9)
+            {
+                sMinute = "0" + Integer.toString(minute);
+            }
+            else 
+                sMinute = Integer.toString(minute);
             //update date
             date();
         }
@@ -204,8 +210,10 @@ public class GUI
         //update time
         time();
         //update self
-        if(updates < Game.Game.updates - FRAMES_PER_MINUTE)
+        if(updates < Game.Game.updates - FRAMES_PER_SECONDS)
             updates = Game.Game.updates;
+        if(hand != null)
+            hand.update();
     }
     
     public void render()
@@ -227,7 +235,7 @@ public class GUI
         Game.Game.display.renderFixedText(Game.Game.display.getWidth() - 150, 0, "Arial", sDay + "/" + sMonth + "/" + sYear, Font.PLAIN, size, Color.WHITE);
         //render money
         Game.Game.display.renderFixedSprite(0, 0 + 4, Sprite.sprMoneyIcon);
-        Game.Game.display.renderFixedText(Sprite.sprMoneyIcon.getWidth(), 0, "Arial", Double.toString(money), Font.PLAIN, 20, Color.WHITE);
+        Game.Game.display.renderFixedText(Sprite.sprMoneyIcon.getWidth(), 0, "Arial", String.format("%1$.2f", money), Font.PLAIN, 20, Color.WHITE);
         //render hand
         if(hand != null)
             hand.render();

@@ -10,70 +10,113 @@ import Game.Display.SpriteSheet;
 import Game.Entity.Entity;
 import Game.Entity.Player;
 import Items.Item;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Level
 {
-    int width, height;
+    public int width, height;
     
     private List <Entity> entities = new ArrayList<Entity>();
     private List <Item> items = new ArrayList<Item>();
-    private static Item hand = null;
+    private List <AudioPlayer> audioPlayers = new ArrayList<AudioPlayer>();
     private Map map;
-    public static Player player;
+    public boolean[] solid;
+    private SpriteSheet sheet;
+    public boolean isMap = true;
+    private Sprite sprite;
+    public int xScroll = 0, yScroll = 0;
+    private Level exit;
+    private int startx, starty;
     /**
      * Level constructor. Generates a level from the specified image.
      * <p>
      * Check the class for details on pixel to object conversion.
      * <p>
-     * @param width
-     * @param height
+     * @param startx
+     * @param starty 
      * @param sheet 
      */
-    public Level(int width, int height, SpriteSheet sheet)
+    public Level(int startx, int starty, SpriteSheet sheet)
     {
-        this.width = width;
-        this.height = height;
-        player = new Player(320, 320);
+        this.startx = startx;
+        this.starty = starty;
+        this.width = sheet.getWidth();
+        this.height = sheet.getHeight();
+        this.sheet = sheet;
+        solid = new boolean[this.width * this.height];
+        load();
+    }
+    
+    public Level(int startx, int starty, SpriteSheet sheet, Level exit)
+    {
+        this.startx = startx;
+        this.starty = starty;
+        this.width = sheet.getWidth();
+        this.height = sheet.getHeight();
+        solid = new boolean[this.width * this.height];
+        this.exit = exit;
+        this.sheet = sheet;
+        load();
+    }
+    
+    public void load()
+    {
         load(sheet);
     }
     
     public void render()
     {
         //render map
+        map.render();
         //render entities
         for(int i = 0; i < entities.size(); i++)
             entities.get(i).render();
-        //render player
-        player.render();
+        
         //render items
         for(int i = 0; i < items.size(); i++)
             items.get(i).render();
+        //render audioPlayers
+        for(int i = 0; i < audioPlayers.size(); i++)
+            audioPlayers.get(i).render();
+        //render player
+        Game.Game.player.render();
         //render hand
-        if(hand != null)
-            hand.render();
-        Game.Game.display.renderSprite(0, 0, Sprite.sprGrass);
     }
     
     public void update()
     {
+        //check exit
+        if(Game.Game.keyboard.checkKey(KeyEvent.VK_ESCAPE) && !isMap)
+        {
+            for(int i = 0; i < audioPlayers.size(); i++)
+                audioPlayers.get(i).stop();
+            map.stop();
+            exit.xScroll = 0;
+            exit.yScroll = 0;
+            Game.Game.mainLevel = exit;
+            Game.Game.player.setPos(0, 0);
+            Game.Game.player.centerCamera();
+        }
+        //update map
+        map.update();
         //update entities
         for(int i = 0; i < entities.size(); i++)
             entities.get(i).update();
-        //update player
-        player.update();
+        //update audio players
+        for(int i = 0; i < audioPlayers.size(); i++)
+            audioPlayers.get(i).update();
         //update items
         for(int i = 0; i < items.size(); i++)
             items.get(i).update();
-        //update hand
-        if(hand != null)
-            hand.update();
+        //update player
+        Game.Game.player.update();
     }
     
     private void load(SpriteSheet sheet)
     {
-        map = new Map(sheet);
+        map = new Map(sheet, this);
     }
     
     private void click()

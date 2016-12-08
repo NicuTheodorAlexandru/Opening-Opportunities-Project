@@ -44,8 +44,8 @@ public class Mouse implements MouseListener, MouseMotionListener
     
     public boolean mouseOver(int x, int y, int width, int height)
     {
-        x += Game.Game.xScroll;
-        y += Game.Game.yScroll;
+        x += Game.Game.mainLevel.xScroll;
+        y += Game.Game.mainLevel.yScroll;
         if(mouseX == -1)return false;
         if(mouseY == -1)return false;
         if(mouseX >= x && mouseX < x + width)
@@ -56,12 +56,12 @@ public class Mouse implements MouseListener, MouseMotionListener
     
     public int getY()
     {
-        return mouseY + Game.Game.yScroll;
+        return mouseY - Game.Game.mainLevel.yScroll;
     }
     
     public int getX()
     {
-        return mouseX + Game.Game.xScroll;
+        return mouseX - Game.Game.mainLevel.xScroll;
     }
     
     public int getFixedY()
@@ -77,11 +77,7 @@ public class Mouse implements MouseListener, MouseMotionListener
     @Override
     public void mouseClicked(MouseEvent e)
     {
-        if(e.getButton() == MouseEvent.BUTTON1)
-        {
-            mouseLeftClicked = true;
-            skip = true;
-        }
+        
     }
     
     @Override
@@ -89,13 +85,17 @@ public class Mouse implements MouseListener, MouseMotionListener
     {
         mouseB = e.getButton();
         if(mouseB == MouseEvent.BUTTON1)
+        {
             mouseLeftClicked = true;
+            skip = true;
+        }
     }
     
     @Override
     public void mouseReleased(MouseEvent e)
     {
         mouseB = -1;
+        mouseLeftClicked = false;
     }
     
     @Override
@@ -126,7 +126,13 @@ public class Mouse implements MouseListener, MouseMotionListener
     
     public void update()
     {
-        
+        if(mouseLeftClicked)
+        {
+            if(skip)
+                skip = false;
+            else
+                mouseLeftClicked = false;
+        }
         //update mouse left click
         //update skip
     }

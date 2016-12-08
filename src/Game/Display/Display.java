@@ -15,8 +15,8 @@ import java.awt.Graphics;
  */
 public class Display
 {
-    private final static int CLEAR_COLOR = 0xff123456;
-    private final static int TRANSPARENT_COLOR = 0xff150f0f;
+    private final static int CLEAR_COLOR = 0xff2f7828;
+    public final static int TRANSPARENT_COLOR = 0xff150f0f;
     
     private int width, height;
     public int[] pixels;
@@ -31,8 +31,8 @@ public class Display
     
     public boolean onScreen(int x, int y, int width, int height)
     {
-        if(x >= Game.Game.xScroll && x - width <= Game.Game.xScroll + Game.Game.display.getWidth())
-            if(y >= Game.Game.yScroll && y - height <= Game.Game.yScroll + Game.Game.display.getHeight())
+        if(x >= Game.Game.mainLevel.xScroll && x - width <= Game.Game.mainLevel.xScroll + Game.Game.display.getWidth())
+            if(y >= Game.Game.mainLevel.yScroll && y - height <= Game.Game.mainLevel.yScroll + Game.Game.display.getHeight())
                 return true;
         return false;
     }
@@ -71,10 +71,10 @@ public class Display
      */
     public void renderSprite(int x, int y, Sprite sprite)
     {
-        for(int yy = y + Game.Game.yScroll, j = 0; j < sprite.getHeight(); yy++, j++)
+        for(int yy = y + Game.Game.mainLevel.yScroll, j = 0; j < sprite.getHeight(); yy++, j++)
         {
             if(yy < 0 || yy >= height)continue;
-            for(int xx = x + Game.Game.xScroll, i = 0; i < sprite.getWidth(); xx++, i++)
+            for(int xx = x + Game.Game.mainLevel.xScroll, i = 0; i < sprite.getWidth(); xx++, i++)
             {
                 if(xx < 0 || xx >= width)continue;
                 if(sprite.pixels[i + j * sprite.getWidth()] == TRANSPARENT_COLOR)continue;
@@ -151,8 +151,8 @@ public class Display
     
     public void renderText(int x, int y, String font, String text, int style, int size, Color color)
     {
-        int xx = x + Game.Game.xScroll;
-        int yy = y + Game.Game.yScroll;
+        int xx = x + Game.Game.mainLevel.xScroll;
+        int yy = y + Game.Game.mainLevel.yScroll;
         Font f = new Font(font, style, size);
         g.setColor(color);
         g.setFont(f);
@@ -161,8 +161,8 @@ public class Display
     
     public void renderBox(int x, int y, int width, int height, int borderSize, int borderColor, int insideColor)
     {
-        x += Game.Game.xScroll;
-        y += Game.Game.yScroll;
+        x += Game.Game.mainLevel.xScroll;
+        y += Game.Game.mainLevel.yScroll;
         //render outline
         //render lines
         for(int yy = y; yy < y + borderSize; yy++)

@@ -28,6 +28,28 @@ public class Player extends Entity
         inventory = new Inventory();
     }
     
+    public void setPos(int x, int y)
+    {
+        this.x = x;
+        this.y = y;
+    }
+    
+    public int getHeight()
+    {
+        return sprite.getHeight();
+    }
+    
+    public int getWidth()
+    {
+        return sprite.getWidth();
+    }
+    
+    public void centerCamera()
+    {
+        Game.Game.mainLevel.xScroll = -x + Game.Game.WIDTH / 2 - sprite.getWidth() / 2;
+        Game.Game.mainLevel.yScroll = -y + Game.Game.HEIGHT / 2 - sprite.getHeight() / 2;
+    }
+    
     private void anim()
     {
         if(dir == 1)//front
@@ -100,7 +122,7 @@ public class Player extends Entity
     {
         moved = false;
         //go up
-        if(Game.Game.keyboard.checkKey(KeyEvent.VK_W))
+        if(Game.Game.keyboard.checkKey(KeyEvent.VK_W) && !getSolid(x, y - speed))
         {
             dir = 1;
             y -= speed;
@@ -110,8 +132,8 @@ public class Player extends Entity
                 Game.Game.gui.hungerBar.changeValue(decrement);
                 Game.Game.gui.thirstBar.changeValue(decrement * 2);
             }
-            Game.Game.yScroll += speed;
-            if(Game.Game.keyboard.checkKey(KeyEvent.VK_SHIFT))
+            Game.Game.mainLevel.yScroll += speed;
+            if(Game.Game.keyboard.checkKey(KeyEvent.VK_SHIFT) && !getSolid(x, y - speed))
             {
                 y -= speed;
                 if(moved == false)
@@ -120,12 +142,12 @@ public class Player extends Entity
                     Game.Game.gui.hungerBar.changeValue(decrement);
                     Game.Game.gui.thirstBar.changeValue(decrement * 2);
                 }
-                Game.Game.yScroll += speed;
+                Game.Game.mainLevel.yScroll += speed;
             }
             if(moved == false)moved = true;
         }
         //go down
-        if(Game.Game.keyboard.checkKey(KeyEvent.VK_S))
+        if(Game.Game.keyboard.checkKey(KeyEvent.VK_S) && !getSolid(x, y + speed))
         {
             dir = 3;
             y += speed;
@@ -135,8 +157,8 @@ public class Player extends Entity
                 Game.Game.gui.hungerBar.changeValue(decrement);
                 Game.Game.gui.thirstBar.changeValue(decrement * 2);
             }
-            Game.Game.yScroll -= speed;
-            if(Game.Game.keyboard.checkKey(KeyEvent.VK_SHIFT))
+            Game.Game.mainLevel.yScroll -= speed;
+            if(Game.Game.keyboard.checkKey(KeyEvent.VK_SHIFT) && !getSolid(x, y + speed))
             {
                 y += speed;
                 if(moved == false)
@@ -145,12 +167,12 @@ public class Player extends Entity
                     Game.Game.gui.hungerBar.changeValue(decrement);
                     Game.Game.gui.thirstBar.changeValue(decrement * 2);
                 }
-                Game.Game.yScroll -= speed;
+                Game.Game.mainLevel.yScroll -= speed;
             }
             if(moved == false)moved = true;
         }
         //go right
-        if(Game.Game.keyboard.checkKey(KeyEvent.VK_D))
+        if(Game.Game.keyboard.checkKey(KeyEvent.VK_D) && !getSolid(x + speed, y))
         {
             dir = 2;
             x += speed;
@@ -160,22 +182,22 @@ public class Player extends Entity
                 Game.Game.gui.hungerBar.changeValue(decrement);
                 Game.Game.gui.thirstBar.changeValue(decrement * 2);
             }
-            Game.Game.xScroll -= speed;
-            if(Game.Game.keyboard.checkKey(KeyEvent.VK_SHIFT))
+            Game.Game.mainLevel.xScroll -= speed;
+            if(Game.Game.keyboard.checkKey(KeyEvent.VK_SHIFT) && !getSolid(x + speed, y))
             {
                 x += speed;
                 if(moved == false)
                 {
-                     Game.Game.gui.restBar.changeValue(decrement);
+                    Game.Game.gui.restBar.changeValue(decrement);
                     Game.Game.gui.hungerBar.changeValue(decrement);
                     Game.Game.gui.thirstBar.changeValue(decrement * 2);
                 }
-                Game.Game.xScroll -= speed;
+                Game.Game.mainLevel.xScroll -= speed;
             }
             if(moved == false)moved = true;
         }
         //go left
-        if(Game.Game.keyboard.checkKey(KeyEvent.VK_A))
+        if(Game.Game.keyboard.checkKey(KeyEvent.VK_A) && !getSolid(x - speed, y))
         {
             dir = 4;
             x -= speed;
@@ -185,8 +207,8 @@ public class Player extends Entity
                 Game.Game.gui.hungerBar.changeValue(decrement);
                 Game.Game.gui.thirstBar.changeValue(decrement * 2);
             }
-            Game.Game.xScroll += speed;
-            if(Game.Game.keyboard.checkKey(KeyEvent.VK_SHIFT))
+            Game.Game.mainLevel.xScroll += speed;
+            if(Game.Game.keyboard.checkKey(KeyEvent.VK_SHIFT) && !getSolid(x - speed, y))
             {
                 x -= speed;
                 if(moved == false)
@@ -195,7 +217,7 @@ public class Player extends Entity
                     Game.Game.gui.hungerBar.changeValue(decrement);
                     Game.Game.gui.thirstBar.changeValue(decrement * 2);
                 }
-                Game.Game.xScroll += speed;
+                Game.Game.mainLevel.xScroll += speed;
             }
             if(moved == false)moved = true;
         }
@@ -215,18 +237,32 @@ public class Player extends Entity
         else anim = 0;
         moved = false;
         if(Game.Game.gui.interfaceOpen == false)
-        move();
+            move();
         anim();
         inventory.update();
     }
     
+    @Override
     public int getX()
     {
         return x;
     }
     
+    @Override
     public int getY()
     {
         return y;
+    }
+    
+    private boolean getSolid(int x, int y)
+    {
+        if(x < 0)return true;
+        if(x + sprite.getWidth() >= Game.Game.mainLevel.width)return true;
+        if(y + sprite.getHeight() >= Game.Game.mainLevel.height || y + sprite.getHeight() < 0)return true;
+        for(int i = x; i <= x + sprite.getWidth(); i++)
+        {
+            if(Game.Game.mainLevel.solid[i + (y + sprite.getHeight()) * Game.Game.mainLevel.width])return true;
+        }
+        return false;
     }
 }

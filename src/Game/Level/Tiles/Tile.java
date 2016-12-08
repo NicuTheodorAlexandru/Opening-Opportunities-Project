@@ -5,7 +5,9 @@
  */
 package Game.Level.Tiles;
 
+import Game.Display.Display;
 import Game.Display.Sprite;
+import Game.Level.Level;
 
 /**
  *
@@ -16,13 +18,30 @@ public class Tile
     private Sprite sprite;
     private boolean solid;
     private int x, y;
+    private Level level;
 
-    public Tile(Sprite sprite, boolean solid, int x, int y)
+    public Tile(Level level, Sprite sprite, boolean solid, int x, int y)
     {
         this.x = x;
         this.y = y;
         this.solid = solid;
         this.sprite = sprite;
+        this.level = level;
+        if(solid)
+            solidity();
+    }
+    
+    private void solidity()
+    {
+        for(int y = 0; y < sprite.getHeight(); y++)
+        {
+            for(int x = 0; x < sprite.getWidth(); x++)
+            {
+                if(sprite.pixels[x + y * sprite.getWidth()] == Display.TRANSPARENT_COLOR)
+                    continue;
+                level.solid[(x + this.x) + (y + this.y) * level.width] = true;
+            }
+        }
     }
     
     public int getY()
